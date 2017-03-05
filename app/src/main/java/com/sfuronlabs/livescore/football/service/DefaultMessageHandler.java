@@ -1,12 +1,12 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.service;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
+
+import com.sfuronlabs.livescore.football.R;
 
 import java.lang.ref.WeakReference;
 

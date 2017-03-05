@@ -1,8 +1,7 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public class League {
     private String league;
     private String key;
     private String hi;
-    private List<Match> matches;
+    private List<MatchSummary> matches;
 
     public String getLeague() {
         return league;
@@ -39,11 +38,25 @@ public class League {
         this.hi = hi;
     }
 
-    public List<Match> getMatches() {
+    public List<MatchSummary> getMatches() {
         return matches;
     }
 
-    public void setMatches(List<Match> matches) {
+    public void setMatches(List<MatchSummary> matches) {
         this.matches = matches;
+    }
+
+    @Override
+    public String toString() {
+        String mtch = "";
+        for (int i=0;i<matches.size();i++) {
+            mtch += matches.get(i).toString();
+        }
+        return "League{" +
+                "league='" + league + '\'' +
+                ", key='" + key + '\'' +
+                ", hi='" + hi + '\'' +
+                ", matches=" + mtch +
+                '}';
     }
 }

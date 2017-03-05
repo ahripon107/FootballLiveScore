@@ -1,8 +1,10 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.util;
 
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+
+import com.sfuronlabs.livescore.football.util.CollectionUtils;
 
 import java.util.List;
 

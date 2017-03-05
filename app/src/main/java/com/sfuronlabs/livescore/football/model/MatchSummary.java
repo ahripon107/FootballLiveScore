@@ -1,4 +1,4 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Match {
+public class MatchSummary {
     private String id;
     private String time;
     private String status;
@@ -228,5 +228,34 @@ public class Match {
 
     public void setVisitorTeamOrg(String visitorTeamOrg) {
         this.visitorTeamOrg = visitorTeamOrg;
+    }
+
+    @Override
+    public String toString() {
+        return "MatchSummary{" +
+                "id='" + id + '\'' +
+                ", time='" + time + '\'' +
+                ", status='" + status + '\'' +
+                ", visitorTeamId='" + visitorTeamId + '\'' +
+                ", localTeamId='" + localTeamId + '\'' +
+                ", date='" + date + '\'' +
+                ", scoreTime='" + scoreTime + '\'' +
+                ", localTeam='" + localTeam + '\'' +
+                ", visitorTeam='" + visitorTeam + '\'' +
+                ", leagueId='" + leagueId + '\'' +
+                ", leagueName='" + leagueName + '\'' +
+                ", fileGroup='" + fileGroup + '\'' +
+                ", stageId='" + stageId + '\'' +
+                ", stageRound='" + stageRound + '\'' +
+                ", stageName='" + stageName + '\'' +
+                ", season='" + season + '\'' +
+                ", leagueKey='" + leagueKey + '\'' +
+                ", localCoach='" + localCoach + '\'' +
+                ", localCoachId='" + localCoachId + '\'' +
+                ", visitorCoach='" + visitorCoach + '\'' +
+                ", visitorCoachId='" + visitorCoachId + '\'' +
+                ", localTeamOrg='" + localTeamOrg + '\'' +
+                ", visitorTeamOrg='" + visitorTeamOrg + '\'' +
+                '}';
     }
 }

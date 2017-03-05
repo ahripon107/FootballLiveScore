@@ -1,4 +1,4 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

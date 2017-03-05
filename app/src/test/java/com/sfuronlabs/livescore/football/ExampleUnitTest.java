@@ -1,4 +1,4 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football;
 
 import org.junit.Test;
 

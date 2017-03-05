@@ -1,4 +1,4 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.util;
 
 import android.content.Intent;
 import android.content.res.Configuration;

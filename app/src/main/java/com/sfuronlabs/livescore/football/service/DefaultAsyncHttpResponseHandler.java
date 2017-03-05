@@ -1,17 +1,15 @@
-package com.sfuronlabs.ripon.livecricketscore;
+package com.sfuronlabs.livescore.football.service;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.sfuronlabs.livescore.football.util.StringUtils;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.UnknownHostException;
 import java.util.Collection;
 
 import cz.msebera.android.httpclient.Header;
