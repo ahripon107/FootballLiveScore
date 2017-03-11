@@ -3,11 +3,13 @@ package com.sfuronlabs.livescore.football.model;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MatchSummary {
+public class MatchSummary implements Serializable{
     private String id;
     private String time;
     private String status;

@@ -2,11 +2,13 @@ package com.sfuronlabs.livescore.football.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 /**
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TeamSidelinedPlayer {
+public class TeamSidelinedPlayer implements Serializable{
     private String id;
     private String name;
     private String description;

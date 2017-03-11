@@ -2,13 +2,14 @@ package com.sfuronlabs.livescore.football.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Transfers {
+public class Transfers implements Serializable{
     private List<TransferPlayer> in;
     private List<TransferPlayer> out;
 

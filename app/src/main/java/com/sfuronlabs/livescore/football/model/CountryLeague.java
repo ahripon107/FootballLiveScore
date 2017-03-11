@@ -1,17 +1,20 @@
 package com.sfuronlabs.livescore.football.model;
 
+import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.model.League;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CountryLeague {
+public class CountryLeague implements Serializable{
     private String country;
+
     private List<League> leagues;
 
     public String getCountry() {

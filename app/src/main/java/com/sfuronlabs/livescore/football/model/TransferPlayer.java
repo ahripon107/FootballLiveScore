@@ -2,17 +2,20 @@ package com.sfuronlabs.livescore.football.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 /**
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TransferPlayer {
+public class TransferPlayer implements Serializable{
     private String id;
     private String name;
     private String date;
     private String age;
     private String position;
     private String from;
+    private String to;
     private String teamid;
     private String type;
 
@@ -62,6 +65,14 @@ public class TransferPlayer {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 
     public String getTeamid() {
