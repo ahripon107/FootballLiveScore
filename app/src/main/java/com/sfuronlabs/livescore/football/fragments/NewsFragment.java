@@ -65,7 +65,7 @@ public class NewsFragment extends RoboFragment{
             @Override
             public void onBindViewHolder(NewsViewHolder holder, int position) {
                 NewsItem item = newsItems.get(position);
-                Picasso.with(getContext()).load(item.getImage()).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
+                Picasso.with(getContext()).load(item.getImage()).resize(50,50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
                 holder.title.setText(item.getTitle());
                 holder.date.setText(item.getDate());
             }
@@ -82,9 +82,6 @@ public class NewsFragment extends RoboFragment{
                 newsListAdapter.notifyDataSetChanged();
             }
         });
-
-
-
     }
 
     private static class NewsViewHolder extends RecyclerView.ViewHolder {

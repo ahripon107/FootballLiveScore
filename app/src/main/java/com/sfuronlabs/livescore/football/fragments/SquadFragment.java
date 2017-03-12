@@ -97,8 +97,11 @@ public class SquadFragment extends RoboFragment{
         squadList.setAdapter(squadListAdapter);
         squadList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        players.addAll(team.getSquad());
-        squadListAdapter.notifyDataSetChanged();
+        if (team.getSquad() != null) {
+            players.addAll(team.getSquad());
+            squadListAdapter.notifyDataSetChanged();
+        }
+
 
     }
 

@@ -81,9 +81,12 @@ public class TransferFragment extends RoboFragment{
         transferList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         team = (Team) getArguments().getSerializable("teamDetails");
-        transferPlayers.addAll(team.getTransfers().getIn());
-        transferPlayers.addAll(team.getTransfers().getOut());
-        transferListAdapter.notifyDataSetChanged();
+        if (team.getTransfers() != null) {
+            transferPlayers.addAll(team.getTransfers().getIn());
+            transferPlayers.addAll(team.getTransfers().getOut());
+            transferListAdapter.notifyDataSetChanged();
+        }
+
 
     }
 

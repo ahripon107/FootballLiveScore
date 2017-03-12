@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.SquadFragment;
+import com.sfuronlabs.livescore.football.fragments.TeamInfoFragment;
 import com.sfuronlabs.livescore.football.fragments.TransferFragment;
 import com.sfuronlabs.livescore.football.model.Team;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
@@ -27,7 +28,7 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_league_details)
 public class TeamDetailsActivity extends RoboAppCompatActivity {
 
-    String[] titleText = new String[]{"Squad", "Transfers"};
+    String[] titleText = new String[]{"Team Info","Squad", "Transfers"};
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @InjectView(R.id.pager)
@@ -69,6 +70,12 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
+                TeamInfoFragment fragment = new TeamInfoFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("teamDetails", team);
+                fragment.setArguments(args);
+                return fragment;
+            } else if (position == 1) {
                 SquadFragment fragment = new SquadFragment();
                 Bundle args = new Bundle();
                 args.putSerializable("teamDetails", team);
@@ -81,8 +88,6 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
                 fragment.setArguments(args);
                 return fragment;
             }
-
-
         }
 
         @Override
