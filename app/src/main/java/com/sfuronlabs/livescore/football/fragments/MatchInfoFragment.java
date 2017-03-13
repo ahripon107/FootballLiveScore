@@ -310,7 +310,7 @@ public class MatchInfoFragment extends RoboFragment{
 
 
         if (matchDetails.getLocalTeamStanding() != null) {
-            standings.setText("Standings: "+matchDetails.getLeagueName());
+            standings.setText(matchDetails.getLeagueName());
             TeamStanding localTeamStanding = matchDetails.getLocalTeamStanding();
             localTeamRank.setText(localTeamStanding.getPosition());
             localTeamName.setText(localTeamStanding.getTeam());
