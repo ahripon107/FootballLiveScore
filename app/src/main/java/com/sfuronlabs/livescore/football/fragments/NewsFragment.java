@@ -1,5 +1,6 @@
 package com.sfuronlabs.livescore.football.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
+import com.sfuronlabs.livescore.football.activity.NewsDetailsActivity;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.News;
 import com.sfuronlabs.livescore.football.model.NewsItem;
@@ -64,10 +67,19 @@ public class NewsFragment extends RoboFragment{
 
             @Override
             public void onBindViewHolder(NewsViewHolder holder, int position) {
-                NewsItem item = newsItems.get(position);
+                final NewsItem item = newsItems.get(position);
                 Picasso.with(getContext()).load(item.getImage()).resize(50,50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
                 holder.title.setText(item.getTitle());
                 holder.date.setText(item.getDate());
+
+                holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), NewsDetailsActivity.class);
+                        intent.putExtra(NewsDetailsActivity.EXTRA_URL, item.getLink());
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
         };
 
@@ -88,12 +100,14 @@ public class NewsFragment extends RoboFragment{
         protected CircleImageView image;
         protected TextView title;
         protected TextView date;
+        protected LinearLayout linearLayout;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
             image = ViewHolder.get(itemView, R.id.img_news);
             title = ViewHolder.get(itemView, R.id.tv_title);
             date = ViewHolder.get(itemView, R.id.tv_date);
+            linearLayout = ViewHolder.get(itemView, R.id.linear_layout);
         }
     }
 }
