@@ -3,8 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_margin="5dp"
-    android:id="@+id/linear_layout">
+    android:padding="5dp"
+    android:id="@+id/linear_layout"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_news"
@@ -24,7 +27,6 @@
             android:id="@+id/tv_title"
             android:textSize="16sp"
             android:textColor="@color/Black"
-            android:text="title"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -33,7 +35,6 @@
             android:id="@+id/tv_date"
             android:textSize="12sp"
             android:textColor="@color/Black"
-            android:text="date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Handler;
 import com.google.inject.Inject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.sfuronlabs.livescore.football.model.Commentary;
+import com.sfuronlabs.livescore.football.model.FeedAppStart;
 import com.sfuronlabs.livescore.football.model.LiveTicker;
 import com.sfuronlabs.livescore.football.model.CountryLeague;
 import com.sfuronlabs.livescore.football.model.MatchDetails;
@@ -57,5 +58,9 @@ public class NetworkService {
 
     public void fetchNewsList(Handler handler) {
         httpClient.get("http://static.holoduke.nl/footapi/news/US.json", new DefaultAsyncHttpResponseHandler(handler, News.class));
+    }
+
+    public void fetchFeedAppStart(Handler handler) {
+        httpClient.get("http://static.holoduke.nl/footapi/fixtures/feed_appstart.json", new DefaultAsyncHttpResponseHandler(handler, FeedAppStart.class));
     }
 }

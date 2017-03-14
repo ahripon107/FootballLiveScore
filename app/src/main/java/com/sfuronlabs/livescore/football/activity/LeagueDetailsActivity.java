@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.LeagueScheduleFragment;
@@ -31,6 +32,8 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         leagueKey = getIntent().getStringExtra("leagueKey");
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -73,6 +76,17 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return titleText[position];
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

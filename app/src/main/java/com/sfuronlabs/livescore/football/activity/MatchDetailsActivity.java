@@ -88,6 +88,7 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
             public void onSuccess(Message msg) {
                 matchDetails = (MatchDetails) msg.obj;
 
+                setTitle(matchDetails.getLocalTeam() + " vs " + matchDetails.getVisitorTeam());
                 Log.d("ripon", matchDetails.toString());
                 localTeam.setText(matchDetails.getLocalTeam());
                 visitorTeam.setText(matchDetails.getVisitorTeam());

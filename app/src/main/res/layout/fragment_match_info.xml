@@ -50,7 +50,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="3dp"/>
             <TextView
                 android:layout_margin="5dp"
@@ -66,7 +66,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginRight="3dp"/>
 
         </LinearLayout>
@@ -80,8 +80,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/match_events_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
+                android:layout_height="wrap_content" />
         </android.support.v7.widget.CardView>
 
         <LinearLayout
@@ -94,7 +93,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="3dp"/>
             <TextView
                 android:layout_margin="5dp"
@@ -110,7 +109,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginRight="3dp"/>
 
         </LinearLayout>
@@ -137,7 +136,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="3dp"/>
             <TextView
                 android:layout_margin="5dp"
@@ -153,7 +152,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginRight="3dp"/>
 
         </LinearLayout>
@@ -372,7 +371,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="3dp"/>
             <TextView
                 android:layout_margin="5dp"
@@ -388,7 +387,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginRight="3dp"/>
 
         </LinearLayout>
@@ -413,7 +412,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="3dp"/>
             <TextView
                 android:layout_margin="5dp"
@@ -429,7 +428,7 @@
                 android:background="@color/Black"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:layout_marginRight="3dp"/>
 
         </LinearLayout>

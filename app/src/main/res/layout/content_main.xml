@@ -17,7 +17,9 @@
         android:background="@android:color/white"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        app:tabGravity="fill" />
+        app:tabGravity="fill"
+        app:tabPaddingStart="-1dp"
+        app:tabPaddingEnd="-1dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

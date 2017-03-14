@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
+import com.sfuronlabs.livescore.football.fragments.HomeFragment;
 import com.sfuronlabs.livescore.football.fragments.LiveScoreFragment;
 import com.sfuronlabs.livescore.football.fragments.NewsFragment;
 import com.sfuronlabs.livescore.football.model.CountryLeague;
@@ -44,17 +45,14 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboAppCompatActivity {
 
-
-
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
 
-    String[] titleText = new String[]{"Live Matches", "News"};
+    String[] titleText = new String[]{"Home","News", "Live Matches"};
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +66,6 @@ public class MainActivity extends RoboAppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
-
-
-//        networkService.fetchPlayerCareer("2290", new DefaultMessageHandler(this,true) {
-//            @Override
-//            public void onSuccess(Message msg) {
-//                player = (Player) msg.obj;
-//                Log.d("ripon", player.toString());
-//            }
-//        });
-//
-//        networkService.fetchTeamDetails("16110", new DefaultMessageHandler(this,false){
-//            @Override
-//            public void onSuccess(Message msg) {
-//                team = (Team) msg.obj;
-//                Log.d("ripon", team.getFixtures().toString());
-//            }
-//        });
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -96,13 +77,13 @@ public class MainActivity extends RoboAppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                LiveScoreFragment fragment = new LiveScoreFragment();
-                return fragment;
+                return new HomeFragment();
+            } else if (position == 1) {
+                return new NewsFragment();
             } else {
-                NewsFragment fragment = new NewsFragment();
-                return fragment;
-            }
+                return new LiveScoreFragment();
 
+            }
         }
 
         @Override
@@ -115,6 +96,4 @@ public class MainActivity extends RoboAppCompatActivity {
             return titleText[position];
         }
     }
-
-
 }
