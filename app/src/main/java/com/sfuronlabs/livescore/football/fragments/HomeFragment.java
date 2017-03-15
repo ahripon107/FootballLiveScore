@@ -92,6 +92,7 @@ public class HomeFragment extends RoboFragment{
             @Override
             public void onSuccess(Message msg) {
                 feedAppStart = (FeedAppStart) msg.obj;
+                countries.clear();
                 countries.addAll(feedAppStart.getCountries());
                 countryListAdapter.notifyDataSetChanged();
             }

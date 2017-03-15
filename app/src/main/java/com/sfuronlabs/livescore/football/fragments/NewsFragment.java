@@ -20,6 +20,7 @@ import com.sfuronlabs.livescore.football.model.News;
 import com.sfuronlabs.livescore.football.model.NewsItem;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -85,6 +86,8 @@ public class NewsFragment extends RoboFragment{
 
         newsList.setAdapter(newsListAdapter);
         newsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        newsList.addItemDecoration(itemDecoration);
 
         networkService.fetchNewsList(new DefaultMessageHandler(getContext(),true){
             @Override

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
@@ -44,7 +45,7 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Log.d("ripon", "http://static.holoduke.nl/footapi/team_gs/"+getIntent().getStringExtra("teamKey")+".json");
         networkService.fetchTeamDetails(getIntent().getStringExtra("teamKey"), new DefaultMessageHandler(this, true) {
@@ -98,6 +99,17 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return titleText[position];
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

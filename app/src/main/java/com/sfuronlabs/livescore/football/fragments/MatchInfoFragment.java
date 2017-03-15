@@ -127,6 +127,9 @@ public class MatchInfoFragment extends RoboFragment{
     @InjectView(R.id.card_head2head)
     private CardView cardHead2Head;
 
+    @InjectView(R.id.key_events_layout)
+    private LinearLayout keyEventsLayout;
+
     private BasicListAdapter<MatchEvent, MatchEventViewHolder> matchEventListAdapter;
     private BasicListAdapter<StatModel, StatsViewHolder> matchStatsListAdapter;
     private BasicListAdapter<LiveTicker, TickerViewHolder> commentryListAdapter;
@@ -143,7 +146,7 @@ public class MatchInfoFragment extends RoboFragment{
     private ArrayList<LiveTicker> commentries;
 
     @Inject
-    NetworkService networkService;
+    private NetworkService networkService;
 
 
     @Nullable
