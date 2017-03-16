@@ -22,12 +22,14 @@ import com.sfuronlabs.livescore.football.model.MatchDetails;
 import com.sfuronlabs.livescore.football.model.MatchEvent;
 import com.sfuronlabs.livescore.football.model.MatchLineup;
 import com.sfuronlabs.livescore.football.model.MatchLineupPlayer;
+import com.sfuronlabs.livescore.football.model.MatchSubstitutionPlayer;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
@@ -53,6 +55,12 @@ public class LineupsFragment extends RoboFragment {
     private ArrayList<MatchLineupPlayer> visitorTeam;
 
     @Inject
+    private ArrayList<MatchSubstitutionPlayer> localteam;
+
+    @Inject
+    private ArrayList<MatchSubstitutionPlayer> visitorteam;
+
+    @Inject
     private NetworkService networkService;
 
     private BasicListAdapter<MatchLineupPlayer, LineupViewHolder> lineupsListAdapter;
@@ -64,7 +72,7 @@ public class LineupsFragment extends RoboFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         matchDetails = (MatchDetails) getArguments().getSerializable("matchdetails");
@@ -130,6 +138,13 @@ public class LineupsFragment extends RoboFragment {
                     visitorTeam.addAll(commentry.getTeams().getVisitorteam());
 
                     lineupsListAdapter.notifyDataSetChanged();
+                }
+
+                if (commentry.getSubstitutions() != null) {
+                    localteam.clear();
+                    visitorteam.clear();
+                    localteam.addAll(commentry.getSubstitutions().getLocalteam());
+                    visitorteam.addAll(commentry.getSubstitutions().getVisitorteam());
                 }
             }
         });

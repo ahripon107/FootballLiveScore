@@ -50,15 +50,9 @@ public class HomeFragment extends RoboFragment{
     @Inject
     private NetworkService networkService;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         countryListAdapter = new BasicListAdapter<CountryAppStart, CountryListViewHolder>(countries) {
             @Override
@@ -83,10 +77,7 @@ public class HomeFragment extends RoboFragment{
             }
         };
 
-        countryList.setAdapter(countryListAdapter);
-        countryList.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
-        countryList.addItemDecoration(itemDecoration);
+
 
         networkService.fetchFeedAppStart(new DefaultMessageHandler(getContext(),true) {
             @Override
@@ -97,6 +88,22 @@ public class HomeFragment extends RoboFragment{
                 countryListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        countryList.setAdapter(countryListAdapter);
+        countryList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        countryList.addItemDecoration(itemDecoration);
     }
 
     private static class CountryListViewHolder extends RecyclerView.ViewHolder {

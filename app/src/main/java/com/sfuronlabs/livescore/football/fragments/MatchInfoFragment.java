@@ -130,6 +130,18 @@ public class MatchInfoFragment extends RoboFragment{
     @InjectView(R.id.key_events_layout)
     private LinearLayout keyEventsLayout;
 
+    @InjectView(R.id.statistics_layout)
+    private LinearLayout statisticsLayout;
+
+    @InjectView(R.id.standings_layout)
+    private LinearLayout standingsLayout;
+
+    @InjectView(R.id.commentry_layout)
+    private LinearLayout commentryLayout;
+
+    @InjectView(R.id.head2head_layout)
+    private LinearLayout head2headLayout;
+
     private BasicListAdapter<MatchEvent, MatchEventViewHolder> matchEventListAdapter;
     private BasicListAdapter<StatModel, StatsViewHolder> matchStatsListAdapter;
     private BasicListAdapter<LiveTicker, TickerViewHolder> commentryListAdapter;
@@ -283,12 +295,23 @@ public class MatchInfoFragment extends RoboFragment{
                 commentries.clear();
                 commentries.addAll(commentry.getLiveticker());
                 commentryListAdapter.notifyDataSetChanged();
+                if (commentries.size() == 0) {
+                    commentryLayout.setVisibility(View.GONE);
+                } else {
+                    commentryLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
 
         matchEvents.clear();
         matchEvents.addAll(matchDetails.getEvents());
         matchEventListAdapter.notifyDataSetChanged();
+
+        if (matchEvents.size() == 0) {
+            keyEventsLayout.setVisibility(View.GONE);
+        } else {
+            keyEventsLayout.setVisibility(View.VISIBLE);
+        }
 
 
         if (matchDetails.getCommentaries() != null) {
@@ -308,6 +331,12 @@ public class MatchInfoFragment extends RoboFragment{
                 stats.add(new StatModel("Saves", local.getSaves(), visitor.getSaves()));
 
                 matchStatsListAdapter.notifyDataSetChanged();
+                statisticsLayout.setVisibility(View.GONE);
+                if (stats.size() > 0) {
+                    statisticsLayout.setVisibility(View.VISIBLE);
+                }
+            } else {
+                statisticsLayout.setVisibility(View.GONE);
             }
         }
 
@@ -323,7 +352,10 @@ public class MatchInfoFragment extends RoboFragment{
             localTeamLoss.setText(localTeamStanding.getTotalLost());
             localTeamGd.setText(localTeamStanding.getGoalDifference());
             localTeamPts.setText(localTeamStanding.getPoints());
+            standingsLayout.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.VISIBLE);
         } else {
+            standingsLayout.setVisibility(View.GONE);
             cardView.setVisibility(View.GONE);
         }
 
@@ -344,7 +376,10 @@ public class MatchInfoFragment extends RoboFragment{
             visitorWins.setText(matchDetails.getStats().getTotal_visitorteam_won());
             localGoals.setText(matchDetails.getStats().getTotal_localteam_scored());
             visitorGoals.setText(matchDetails.getStats().getTotal_visitorteam_scored());
+            head2headLayout.setVisibility(View.VISIBLE);
+            cardHead2Head.setVisibility(View.VISIBLE);
         } else {
+            head2headLayout.setVisibility(View.GONE);
             cardHead2Head.setVisibility(View.GONE);
         }
 

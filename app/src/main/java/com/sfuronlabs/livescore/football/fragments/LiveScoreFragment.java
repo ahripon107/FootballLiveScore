@@ -47,6 +47,9 @@ public class LiveScoreFragment extends RoboFragment{
     @InjectView(R.id.list)
     private RecyclerView liveMatchesList;
 
+    @InjectView(R.id.tv_empty)
+    private TextView emptyView;
+
     private List<CountryLeague> countryLeagues = new ArrayList<>();
 
     private ArrayList<MatchSummary> liveMatches = new ArrayList<>();
@@ -106,6 +109,7 @@ public class LiveScoreFragment extends RoboFragment{
             @Override
             public void onSuccess(Message msg) {
                 countryLeagues = (List<CountryLeague>) msg.obj;
+                liveMatches.clear();
                 for (int i=0;i<countryLeagues.size();i++) {
                     for (int j=0;j<countryLeagues.get(i).getLeagues().size();j++) {
                         liveMatches.addAll(countryLeagues.get(i).getLeagues().get(j).getMatches());
@@ -114,6 +118,12 @@ public class LiveScoreFragment extends RoboFragment{
                     //Log.d("ripon", countryLeagues.get(i).toString());
                 }
                 liveMatchesListAdapter.notifyDataSetChanged();
+                if (liveMatches.size() > 0) {
+                    emptyView.setVisibility(View.GONE);
+                } else {
+                    emptyView.setVisibility(View.VISIBLE);
+                    emptyView.setText("No live matches ongoing");
+                }
 
             }
         });

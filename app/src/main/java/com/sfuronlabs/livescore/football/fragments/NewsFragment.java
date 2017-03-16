@@ -49,15 +49,9 @@ public class NewsFragment extends RoboFragment{
 
     private BasicListAdapter<NewsItem, NewsViewHolder> newsListAdapter;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list,container,false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         newsListAdapter = new BasicListAdapter<NewsItem, NewsViewHolder>(newsItems) {
             @Override
@@ -84,11 +78,6 @@ public class NewsFragment extends RoboFragment{
             }
         };
 
-        newsList.setAdapter(newsListAdapter);
-        newsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
-        newsList.addItemDecoration(itemDecoration);
-
         networkService.fetchNewsList(new DefaultMessageHandler(getContext(),true){
             @Override
             public void onSuccess(Message msg) {
@@ -98,6 +87,23 @@ public class NewsFragment extends RoboFragment{
             }
         });
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        newsList.setAdapter(newsListAdapter);
+        newsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        newsList.addItemDecoration(itemDecoration);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.list,container,false);
+    }
+
 
     private static class NewsViewHolder extends RecyclerView.ViewHolder {
         protected CircleImageView image;

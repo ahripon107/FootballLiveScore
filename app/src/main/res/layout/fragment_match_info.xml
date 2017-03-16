@@ -89,7 +89,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:id="@+id/statistics_layout">
+            android:id="@+id/statistics_layout"
+            android:visibility="gone">
 
             <View
                 android:background="@color/Black"
@@ -369,7 +370,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:id="@+id/commentry_layout">
+            android:id="@+id/commentry_layout"
+            android:visibility="gone">
 
             <View
                 android:background="@color/Black"
