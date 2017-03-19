@@ -100,10 +100,13 @@ public class TeamInfoFragment extends RoboFragment{
             public void onBindViewHolder(CompetitionsViewHolder holder, int position) {
                 TeamLeague teamLeague = competitions.get(position);
                 holder.name.setText(teamLeague.getLeague());
-                holder.description.setText(teamLeague.getCountry()+" - "+teamLeague.getPosition());
+                if (teamLeague.getPosition() != null) {
+                    holder.description.setText(teamLeague.getCountry()+" - Position: "+teamLeague.getPosition());
+                } else {
+                    holder.description.setText("");
+                }
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        teamLeague.getKey()+"_small.png").into(holder.imageView);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/flags/"+prepareCountryName(teamLeague.getCountry())+".png").into(holder.imageView);
             }
         };
 
@@ -158,6 +161,10 @@ public class TeamInfoFragment extends RoboFragment{
             scheduleListAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    private String prepareCountryName(String str) {
+        return str.replace(' ', '-').toLowerCase();
     }
 
     private static class CompetitionsViewHolder extends RecyclerView.ViewHolder {

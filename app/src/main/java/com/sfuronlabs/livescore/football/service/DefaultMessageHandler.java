@@ -55,7 +55,7 @@ public class DefaultMessageHandler extends Handler {
     }
 
     public void onFailure(Message msg) {
-        Toast.makeText(contextWeakReference.get(),"Failed "+msg.obj,Toast.LENGTH_LONG).show();
+
     }
 }
 

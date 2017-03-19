@@ -1,5 +1,6 @@
 package com.sfuronlabs.livescore.football.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -10,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
+import com.sfuronlabs.livescore.football.activity.TeamDetailsActivity;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.PointTable;
 import com.sfuronlabs.livescore.football.model.TeamStanding;
@@ -63,7 +66,7 @@ public class StandingFragment extends RoboFragment{
 
             @Override
             public void onBindViewHolder(StandingViewHolder holder, int position) {
-                TeamStanding teamStanding = standings.get(position);
+                final TeamStanding teamStanding = standings.get(position);
                 holder.localTeamName.setText(teamStanding.getTeam());
                 holder.localTeamGp.setText(teamStanding.getTotalPlayed());
                 holder.localTeamWins.setText(teamStanding.getTotalWon());
@@ -76,6 +79,15 @@ public class StandingFragment extends RoboFragment{
                     Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
                             teamStanding.getTeamId()+"_small.png").into(holder.logo);
                 }
+
+                holder.standingsLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), TeamDetailsActivity.class);
+                        intent.putExtra("teamKey", teamStanding.getTeamId());
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
         };
 
@@ -120,6 +132,7 @@ public class StandingFragment extends RoboFragment{
         private TextView localTeamGd;
         private TextView localTeamPts;
         private ImageView logo;
+        private LinearLayout standingsLayout;
 
         public StandingViewHolder(View itemView) {
             super(itemView);
@@ -132,6 +145,7 @@ public class StandingFragment extends RoboFragment{
             localTeamGd = ViewHolder.get(itemView, R.id.tv_local_team_gd);
             localTeamPts = ViewHolder.get(itemView, R.id.tv_local_team_pts);
             logo = ViewHolder.get(itemView, R.id.img_team_logo);
+            standingsLayout = ViewHolder.get(itemView, R.id.standings_layout);
         }
     }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MatchSubstitutionPlayer implements Serializable{
+public class MatchSubstitutionPlayer implements Serializable, Comparable<MatchSubstitutionPlayer>{
     private String off;
     private String on;
     private String on_id;
@@ -64,5 +64,16 @@ public class MatchSubstitutionPlayer implements Serializable{
                 ", off_id='" + off_id + '\'' +
                 ", minute='" + minute + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(MatchSubstitutionPlayer another) {
+        if (Integer.parseInt(minute) > Integer.parseInt(another.getMinute())) {
+            return 1;
+        } else if (Integer.parseInt(minute) < Integer.parseInt(another.getMinute())) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -29,6 +29,7 @@ import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,8 +44,8 @@ public class LineupsFragment extends RoboFragment {
     @InjectView(R.id.team_lineup_list)
     private RecyclerView lineupsList;
 
-    @InjectView(R.id.substitutions_list)
-    private RecyclerView substitutionsList;
+//    @InjectView(R.id.substitutions_list)
+//    private RecyclerView substitutionsList;
 
     private MatchDetails matchDetails;
 
@@ -54,16 +55,14 @@ public class LineupsFragment extends RoboFragment {
     @Inject
     private ArrayList<MatchLineupPlayer> visitorTeam;
 
-    @Inject
-    private ArrayList<MatchSubstitutionPlayer> localteam;
-
-    @Inject
-    private ArrayList<MatchSubstitutionPlayer> visitorteam;
+//    @Inject
+//    private ArrayList<MatchSubstitutionPlayer> matchSubstitutionPlayers;
 
     @Inject
     private NetworkService networkService;
 
     private BasicListAdapter<MatchLineupPlayer, LineupViewHolder> lineupsListAdapter;
+    private BasicListAdapter<MatchSubstitutionPlayer, SubstitutionListViewHolder> substitutionListAdapter;
 
     @Nullable
     @Override
@@ -121,6 +120,46 @@ public class LineupsFragment extends RoboFragment {
         lineupsList.setAdapter(lineupsListAdapter);
         lineupsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+//        substitutionListAdapter = new BasicListAdapter<MatchSubstitutionPlayer, SubstitutionListViewHolder>(matchSubstitutionPlayers) {
+//            @Override
+//            public SubstitutionListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_substitutions,parent,false);
+//                return new SubstitutionListViewHolder(view);
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(SubstitutionListViewHolder holder, int position) {
+//                MatchSubstitutionPlayer matchSubstitutionPlayer = matchSubstitutionPlayers.get(position);
+//
+//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+//                        matchSubstitutionPlayer.getOn_id() + "_small.png").into(holder.leftInPlayer);
+//                holder.leftInPlayerName.setText(matchSubstitutionPlayer.getOn());
+//                holder.leftInEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_in));
+//
+//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+//                        matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.leftOutEvent);
+//                holder.leftOutPlayerName.setText(matchSubstitutionPlayer.getOn());
+//                holder.leftOutEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
+//
+//                holder.rightLinearLayout.setVisibility(View.GONE);
+//
+//                holder.minute.setText(matchSubstitutionPlayer.getMinute());
+//
+//
+//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+//                        matchSubstitutionPlayer.getOn_id() + "_small.png").into(holder.rightInPlayer);
+//                holder.rightInPlayerName.setText(matchSubstitutionPlayer.getOn());
+//                holder.rightInEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_in));
+//
+//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+//                        matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.rightOutPlayer);
+//                holder.rightOutPlayerName.setText(matchSubstitutionPlayer.getOff());
+//                holder.rightOutEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
+//            }
+//        };
+//
+//        substitutionsList.setAdapter(substitutionListAdapter);
+//        substitutionsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Log.d("ripon", "http://holoduke.nl/footapi/commentaries/"+matchDetails.getId()+".json");
 
@@ -140,12 +179,15 @@ public class LineupsFragment extends RoboFragment {
                     lineupsListAdapter.notifyDataSetChanged();
                 }
 
-                if (commentry.getSubstitutions() != null) {
-                    localteam.clear();
-                    visitorteam.clear();
-                    localteam.addAll(commentry.getSubstitutions().getLocalteam());
-                    visitorteam.addAll(commentry.getSubstitutions().getVisitorteam());
-                }
+//                if (commentry.getSubstitutions() != null) {
+//                    matchSubstitutionPlayers.clear();
+//                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getLocalteam());
+//                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getVisitorteam());
+//
+//                    Collections.sort(matchSubstitutionPlayers);
+//
+//                    substitutionListAdapter.notifyDataSetChanged();
+//                }
             }
         });
     }
@@ -181,6 +223,49 @@ public class LineupsFragment extends RoboFragment {
             rightPlayer = ViewHolder.get(itemView, R.id.img_right_player);
             rightPlayerName = ViewHolder.get(itemView, R.id.tv_right_player);
             rightEvent = ViewHolder.get(itemView, R.id.img_right_event);
+            minute = ViewHolder.get(itemView, R.id.tv_minute);
+        }
+    }
+
+    private static class SubstitutionListViewHolder extends RecyclerView.ViewHolder {
+
+        protected LinearLayout leftLinearLayout;
+        protected LinearLayout rightLinearLayout;
+        protected CircleImageView leftInPlayer;
+        protected TextView leftInPlayerName;
+        protected CircleImageView leftInEvent;
+        protected CircleImageView rightInPlayer;
+        protected TextView rightInPlayerName;
+        protected CircleImageView rightInEvent;
+
+        protected CircleImageView leftOutPlayer;
+        protected TextView leftOutPlayerName;
+        protected CircleImageView leftOutEvent;
+        protected CircleImageView rightOutPlayer;
+        protected TextView rightOutPlayerName;
+        protected CircleImageView rightOutEvent;
+
+        protected TextView minute;
+
+        public SubstitutionListViewHolder(View itemView) {
+            super(itemView);
+
+            leftLinearLayout = ViewHolder.get(itemView, R.id.left_linear_layout);
+            rightLinearLayout = ViewHolder.get(itemView, R.id.right_linear_layout);
+            leftInPlayer = ViewHolder.get(itemView, R.id.img_left_in_event);
+            leftInPlayerName = ViewHolder.get(itemView, R.id.tv_left_in_player);
+            leftInEvent = ViewHolder.get(itemView, R.id.img_left_in_event);
+            rightInPlayer = ViewHolder.get(itemView, R.id.img_right_in_player);
+            rightInPlayerName = ViewHolder.get(itemView, R.id.tv_right_in_player);
+            rightInEvent = ViewHolder.get(itemView, R.id.img_right_in_event);
+
+            leftOutPlayer = ViewHolder.get(itemView, R.id.img_left_out_player);
+            leftOutPlayerName = ViewHolder.get(itemView, R.id.tv_left_out_player);
+            leftOutEvent = ViewHolder.get(itemView, R.id.img_left_out_event);
+            rightOutPlayer = ViewHolder.get(itemView, R.id.img_right_out_player);
+            rightOutPlayerName = ViewHolder.get(itemView, R.id.tv_right_out_player);
+            rightOutEvent = ViewHolder.get(itemView, R.id.img_right_out_event);
+
             minute = ViewHolder.get(itemView, R.id.tv_minute);
         }
     }

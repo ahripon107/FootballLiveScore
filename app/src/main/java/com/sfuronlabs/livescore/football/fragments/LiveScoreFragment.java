@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
-import com.sfuronlabs.livescore.football.activity.MainActivity;
 import com.sfuronlabs.livescore.football.activity.MatchDetailsActivity;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.CountryLeague;

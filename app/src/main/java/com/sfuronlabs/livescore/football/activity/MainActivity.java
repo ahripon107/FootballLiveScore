@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.fragments.HomeFragment;
@@ -48,6 +49,8 @@ public class MainActivity extends RoboAppCompatActivity {
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
 
+    private AdView adView;
+
     String[] titleText = new String[]{"Home","News", "Live Matches"};
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -62,6 +65,7 @@ public class MainActivity extends RoboAppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        //adView = (AdView) findViewById(R.id.adview_main);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);

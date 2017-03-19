@@ -10,7 +10,8 @@
         android:orientation="horizontal"
         android:layout_margin="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:id="@+id/standings_layout">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_team_logo"

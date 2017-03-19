@@ -8,14 +8,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.LeagueScheduleFragment;
 import com.sfuronlabs.livescore.football.fragments.LineupsFragment;
 import com.sfuronlabs.livescore.football.fragments.MatchInfoFragment;
 import com.sfuronlabs.livescore.football.fragments.StandingFragment;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 
 import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 
 /**
  * @author Ripon
@@ -28,6 +32,9 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private String leagueKey;
+
+    @InjectView(R.id.adview_league_details)
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,10 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
 
     }
 
