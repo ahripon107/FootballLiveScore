@@ -10,6 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.SquadFragment;
@@ -18,6 +20,7 @@ import com.sfuronlabs.livescore.football.fragments.TransferFragment;
 import com.sfuronlabs.livescore.football.model.Team;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 
 import roboguice.inject.ContentView;
@@ -37,6 +40,10 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
 
     @InjectView(R.id.tab_layout)
     private TabLayout tabLayout;
+
+    @InjectView(R.id.adview_league_details)
+    private AdView adView;
+
     private Team team;
 
     @Inject
@@ -60,6 +67,10 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
                 tabLayout.setupWithViewPager(mViewPager);
             }
         });
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

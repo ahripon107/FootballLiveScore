@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
@@ -33,6 +34,7 @@ import com.sfuronlabs.livescore.football.model.Team;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
 import com.sfuronlabs.livescore.football.R;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
@@ -65,11 +67,15 @@ public class MainActivity extends RoboAppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        //adView = (AdView) findViewById(R.id.adview_main);
+        adView = (AdView) findViewById(R.id.adview_main);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

@@ -127,6 +127,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="xyz">
+        ads:adUnitId="@string/matchdetails">
     </com.google.android.gms.ads.AdView>
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.LineupsFragment;
@@ -23,6 +26,7 @@ import com.sfuronlabs.livescore.football.fragments.MatchInfoFragment;
 import com.sfuronlabs.livescore.football.model.MatchDetails;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 import com.squareup.picasso.Picasso;
 
@@ -59,6 +63,9 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
     @InjectView(R.id.logo_visitor_team)
     private ImageView visitorTeamLogo;
 
+    @InjectView(R.id.adview_match_details)
+    private AdView adView;
+
     private MatchDetails matchDetails;
 
     String[] titleText = new String[]{"Match Info", "Lineups"};
@@ -78,6 +85,10 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
         loadData();
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
     }
 
     private void loadData() {
@@ -94,7 +105,13 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
                 visitorTeam.setText(matchDetails.getVisitorTeam());
                 date.setText(matchDetails.getDate());
                 scoreline.setText(matchDetails.getScoreLine());
-                time.setText(matchDetails.getStatus() + "'");
+                if (matchDetails.getStatus().equals("HT") || matchDetails.getStatus().equals("FT")) {
+                    time.setText(matchDetails.getStatus());
+                } else {
+                    time.setText(matchDetails.getStatus() + "'");
+                }
+
+                time.setTextColor(ContextCompat.getColor(MatchDetailsActivity.this, R.color.Green));
 
                 Picasso.with(MatchDetailsActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
                         matchDetails.getLocalTeamId()+"_small.png").into(localTeamLogo);

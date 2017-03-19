@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +24,10 @@ import com.sfuronlabs.livescore.football.service.NetworkService;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import roboguice.fragment.RoboFragment;
@@ -44,6 +48,7 @@ public class LeagueScheduleFragment extends RoboFragment{
     private NetworkService networkService;
 
     private BasicListAdapter<MatchSummary, ScheduleVieaHolder> scheduleListAdapter;
+    String todaysDate;
 
     @Nullable
     @Override
@@ -54,6 +59,11 @@ public class LeagueScheduleFragment extends RoboFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+
+        todaysDate = dateFormat.format(cal);
 
         scheduleListAdapter = new BasicListAdapter<MatchSummary, ScheduleVieaHolder>(schedules) {
             @Override
@@ -71,8 +81,13 @@ public class LeagueScheduleFragment extends RoboFragment{
                 holder.localTeam.setText(liveMatch.getLocalTeam());
                 holder.visitorTeam.setText(liveMatch.getVisitorTeam());
                 holder.scoreLine.setText(liveMatch.getScoreTime());
-                holder.minute.setText(liveMatch.getStatus()+"'");
+                if (liveMatch.getStatus().equals("HT") || liveMatch.getStatus().equals("FT")) {
+                    holder.minute.setText(liveMatch.getStatus());
+                } else {
+                    holder.minute.setText(liveMatch.getStatus()+"'");
+                }
 
+                holder.minute.setTextColor(ContextCompat.getColor(getContext(), R.color.Green));
                 Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
                         liveMatch.getLocalTeamId()+"_small.png").into(holder.localTeamLogo);
 
@@ -99,8 +114,15 @@ public class LeagueScheduleFragment extends RoboFragment{
                 List<MatchSummary> matchSummaries = (List<MatchSummary>) msg.obj;
                 schedules.addAll(matchSummaries);
                 scheduleListAdapter.notifyDataSetChanged();
+
+                for (int i= 0; i<schedules.size(); i++) {
+                    if (schedules.get(i).getDate().equals(todaysDate)) {
+                        scheduleList.smoothScrollToPosition(i);
+                    }
+                }
             }
         });
+
     }
 
     private static class ScheduleVieaHolder extends RecyclerView.ViewHolder {

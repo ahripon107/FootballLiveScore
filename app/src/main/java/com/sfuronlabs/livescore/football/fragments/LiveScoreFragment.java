@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -84,7 +85,13 @@ public class LiveScoreFragment extends RoboFragment{
                 holder.localTeam.setText(liveMatch.getLocalTeam());
                 holder.visitorTeam.setText(liveMatch.getVisitorTeam());
                 holder.scoreLine.setText(liveMatch.getScoreTime());
-                holder.minute.setText(liveMatch.getStatus()+"'");
+                if (liveMatch.getStatus().equals("HT") || liveMatch.getStatus().equals("FT")) {
+                    holder.minute.setText(liveMatch.getStatus());
+                } else {
+                    holder.minute.setText(liveMatch.getStatus()+"'");
+                }
+
+                holder.minute.setTextColor(ContextCompat.getColor(getContext(), R.color.Green));
 
                 Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
                         liveMatch.getLocalTeamId()+"_small.png").into(holder.localTeamLogo);

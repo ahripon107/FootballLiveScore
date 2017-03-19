@@ -9,7 +9,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sfuronlabs.livescore.football.R;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 
 import roboguice.inject.ContentView;
@@ -25,6 +28,9 @@ public class NewsDetailsActivity extends RoboAppCompatActivity{
 
     @InjectView(R.id.webView)
     private WebView mWebview ;
+
+    @InjectView(R.id.adview_news_details)
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,10 @@ public class NewsDetailsActivity extends RoboAppCompatActivity{
 
 
         mWebview .loadUrl(url);
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
     }
 
     @Override

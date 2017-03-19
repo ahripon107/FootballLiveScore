@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
@@ -22,6 +24,7 @@ import com.sfuronlabs.livescore.football.model.Player;
 import com.sfuronlabs.livescore.football.model.Statistic;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
@@ -63,6 +66,9 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
 
     @InjectView(R.id.img_player)
     private ImageView playerImage;
+
+    @InjectView(R.id.adview_player_details)
+    private AdView adView;
 
     private BasicListAdapter<Statistic,PlayerStatViewHolder> playerStatListAdapter;
 
@@ -145,6 +151,10 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
                 playerStatListAdapter.notifyDataSetChanged();
             }
         });
+
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
+                .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
+        adView.loadAd(adRequest);
 
     }
 

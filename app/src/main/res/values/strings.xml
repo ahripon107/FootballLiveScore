@@ -2,4 +2,10 @@
     <string name="app_name">Live Football Score</string>
     <string name="action_settings">Settings</string>
     <string name="load">reload</string>
+
+    <string name="leaguedetails">ca-app-pub-9201945236996508/6617813678</string>
+    <string name="main">ca-app-pub-9201945236996508/8094546870</string>
+    <string name="matchdetails">ca-app-pub-9201945236996508/9571280073</string>
+    <string name="newsdetails">ca-app-pub-9201945236996508/2048013275</string>
+    <string name="playerinfo">ca-app-pub-9201945236996508/3524746470</string>
 </resources>

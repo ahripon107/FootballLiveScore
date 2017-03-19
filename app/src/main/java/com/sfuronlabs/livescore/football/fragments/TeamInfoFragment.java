@@ -81,10 +81,30 @@ public class TeamInfoFragment extends RoboFragment{
         competitionList.setNestedScrollingEnabled(false);
         scheduleList.setNestedScrollingEnabled(false);
 
-        founded.setText(Html.fromHtml("<b>Founded: </b>"+team.getFounded()));
-        coach.setText(Html.fromHtml("<b>Coach: </b>"+team.getCoach()));
-        country.setText(Html.fromHtml("<b>Country: </b>"+team.getCountry()));
-        city.setText(Html.fromHtml("<b>City: </b>"+team.getVenueCity()));
+        if (team.getFounded() != null) {
+            founded.setText(Html.fromHtml("<b>Founded: </b>"+team.getFounded()));
+        } else {
+            founded.setText(Html.fromHtml("<b>Founded: </b>"));
+        }
+
+        if (team.getCoach() != null) {
+            coach.setText(Html.fromHtml("<b>Coach: </b>"+team.getCoach()));
+        } else {
+            coach.setText(Html.fromHtml("<b>Coach: </b>"));
+        }
+
+        if (team.getCountry() != null) {
+            country.setText(Html.fromHtml("<b>Country: </b>"+team.getCountry()));
+        } else {
+            country.setText(Html.fromHtml("<b>Country: </b>"));
+        }
+
+        if (team.getVenueCity() != null) {
+            city.setText(Html.fromHtml("<b>City: </b>"+team.getVenueCity()));
+        } else {
+            city.setText(Html.fromHtml("<b>City: </b>"));
+        }
+
 
         Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
                 team.getId()+"_small.png").into(teamLogo);
