@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import roboguice.fragment.RoboFragment;
@@ -48,7 +50,6 @@ public class LeagueScheduleFragment extends RoboFragment{
     private NetworkService networkService;
 
     private BasicListAdapter<MatchSummary, ScheduleVieaHolder> scheduleListAdapter;
-    String todaysDate;
 
     @Nullable
     @Override
@@ -59,11 +60,6 @@ public class LeagueScheduleFragment extends RoboFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-
-        todaysDate = dateFormat.format(cal);
 
         scheduleListAdapter = new BasicListAdapter<MatchSummary, ScheduleVieaHolder>(schedules) {
             @Override
@@ -108,18 +104,13 @@ public class LeagueScheduleFragment extends RoboFragment{
         scheduleList.setAdapter(scheduleListAdapter);
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        Log.d("ripon", "http://static.holoduke.nl/footapi/fixtures/"+getArguments().getString("key")+"_small.json");
         networkService.fetchLeagueSchedule(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true){
             @Override
             public void onSuccess(Message msg) {
                 List<MatchSummary> matchSummaries = (List<MatchSummary>) msg.obj;
                 schedules.addAll(matchSummaries);
                 scheduleListAdapter.notifyDataSetChanged();
-
-                for (int i= 0; i<schedules.size(); i++) {
-                    if (schedules.get(i).getDate().equals(todaysDate)) {
-                        scheduleList.smoothScrollToPosition(i);
-                    }
-                }
             }
         });
 

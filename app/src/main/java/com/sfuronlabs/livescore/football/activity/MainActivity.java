@@ -92,7 +92,6 @@ public class MainActivity extends RoboAppCompatActivity {
                 return new NewsFragment();
             } else {
                 return new LiveScoreFragment();
-
             }
         }
 
