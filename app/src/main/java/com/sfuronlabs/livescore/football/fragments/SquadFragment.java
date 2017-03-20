@@ -36,6 +36,9 @@ public class SquadFragment extends RoboFragment{
     @InjectView(R.id.list)
     private RecyclerView squadList;
 
+    @InjectView(R.id.tv_empty)
+    private TextView emptyView;
+
     @Inject
     private ArrayList<TeamSquadPlayer> players;
 
@@ -102,6 +105,10 @@ public class SquadFragment extends RoboFragment{
             squadListAdapter.notifyDataSetChanged();
         }
 
+        emptyView.setVisibility(View.GONE);
+        if (players.size() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+        }
 
     }
 

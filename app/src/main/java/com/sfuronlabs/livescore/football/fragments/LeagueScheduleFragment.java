@@ -2,6 +2,7 @@ package com.sfuronlabs.livescore.football.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -111,6 +112,15 @@ public class LeagueScheduleFragment extends RoboFragment{
                 List<MatchSummary> matchSummaries = (List<MatchSummary>) msg.obj;
                 schedules.addAll(matchSummaries);
                 scheduleListAdapter.notifyDataSetChanged();
+                int position = schedules.size()-1;
+                for (int i=schedules.size()-1;i>=0;i--) {
+                    if (schedules.get(i).getStatus().equals("FT")) {
+                        position = i;
+                        break;
+                    }
+                }
+
+                scheduleList.scrollToPosition(position);
             }
         });
 

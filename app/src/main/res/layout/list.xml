@@ -9,7 +9,7 @@
         android:layout_margin="5dp"
         android:textSize="20sp"
         android:textColor="@color/Black"
-        android:text="Nothing Found To Display"
+        android:text="Nothing found to display"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "463407956672",
+    "firebase_url": "https://live-football-tv-e54c9.firebaseio.com",
+    "project_id": "live-football-tv-e54c9",
+    "storage_bucket": "live-football-tv-e54c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463407956672:android:b166d567130f753a",
+        "android_client_info": {
+          "package_name": "com.bangladroid.footballapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463407956672-ej6vhdel8uqr1k1sntfdelfgkf2dmrtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bangladroid.footballapp",
+            "certificate_hash": "ac2e463e9e46ea618950801e8592d691e340bbdf"
+          }
+        },
+        {
+          "client_id": "463407956672-v4mfg5ebek01mfei4l2eo1v6lvff1jjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6YZT_gOgci6u_LXrUTnt8eJfUoVQffDM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463407956672-v4mfg5ebek01mfei4l2eo1v6lvff1jjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463407956672:android:0e116af4dd63eb7a",
+        "android_client_info": {
+          "package_name": "com.sfuronlabs.livescore.football"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463407956672-v4mfg5ebek01mfei4l2eo1v6lvff1jjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6YZT_gOgci6u_LXrUTnt8eJfUoVQffDM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

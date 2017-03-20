@@ -134,6 +134,7 @@ public class TeamInfoFragment extends RoboFragment{
         competitionList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         if (team.getLeagues() != null) {
+            competitions.clear();
             competitions.addAll(team.getLeagues());
             competitionListAdapter.notifyDataSetChanged();
         }

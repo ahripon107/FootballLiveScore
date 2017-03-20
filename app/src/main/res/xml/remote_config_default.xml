@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>show_image</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>show_popup</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>popup_message</key>
+        <value>Hellow</value>
+    </entry>
+
+    <entry>
+        <key>play_store_url</key>
+        <value>https://play.google.com/store/apps/details?id=com.sfuronlabs.livescore.football</value>
+    </entry>
+
+    <entry>
+        <key>versions</key>
+        <value>xyz</value>
+    </entry>
+
+</defaultsMap>

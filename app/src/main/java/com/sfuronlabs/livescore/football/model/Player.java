@@ -200,22 +200,29 @@ public class Player implements Serializable{
         String statisticsCupsInt = "";
         String statisticsInt = "";
 
-        for (int i=0;i<statistics.size();i++) {
-            statistic += statistics.get(i).toString();
+        if (statistics != null) {
+            for (int i=0;i<statistics.size();i++) {
+                statistic += statistics.get(i).toString();
+            }
         }
 
-        for (int i=0;i<statisticsCups.size();i++) {
-            statisticsCup += statisticsCups.get(i).toString();
+        if (statisticsCups != null) {
+            for (int i=0;i<statisticsCups.size();i++) {
+                statisticsCup += statisticsCups.get(i).toString();
+            }
         }
 
-        for (int i=0;i<statisticsCupsIntl.size();i++) {
-            statisticsCupsInt += statisticsCupsIntl.get(i).toString();
+        if (statisticsIntl != null) {
+            for (int i=0;i<statisticsCupsIntl.size();i++) {
+                statisticsCupsInt += statisticsCupsIntl.get(i).toString();
+            }
         }
 
-        for (int i=0;i<statisticsIntl.size();i++) {
-            statisticsInt += statisticsIntl.get(i).toString();
+        if (statisticsCupsIntl != null) {
+            for (int i=0;i<statisticsIntl.size();i++) {
+                statisticsInt += statisticsIntl.get(i).toString();
+            }
         }
-
 
         return "Player{" +
                 "id='" + id + '\'' +

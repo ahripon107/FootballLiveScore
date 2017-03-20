@@ -44,6 +44,9 @@ public class LineupsFragment extends RoboFragment {
     @InjectView(R.id.team_lineup_list)
     private RecyclerView lineupsList;
 
+    @InjectView(R.id.tv_empty_view)
+    private TextView emptyView;
+
 //    @InjectView(R.id.substitutions_list)
 //    private RecyclerView substitutionsList;
 
@@ -177,6 +180,19 @@ public class LineupsFragment extends RoboFragment {
                     visitorTeam.addAll(commentry.getTeams().getVisitorteam());
 
                     lineupsListAdapter.notifyDataSetChanged();
+                } else if (matchDetails.getLineups() != null) {
+                    homeTeam.clear();
+                    visitorTeam.clear();
+
+                    homeTeam.addAll(matchDetails.getLineups().getLocalteam());
+                    visitorTeam.addAll(matchDetails.getLineups().getVisitorteam());
+
+                    lineupsListAdapter.notifyDataSetChanged();
+                }
+
+                emptyView.setVisibility(View.GONE);
+                if (homeTeam.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
                 }
 
 //                if (commentry.getSubstitutions() != null) {
@@ -188,6 +204,14 @@ public class LineupsFragment extends RoboFragment {
 //
 //                    substitutionListAdapter.notifyDataSetChanged();
 //                }
+            }
+
+            @Override
+            public void onFailure(Message msg) {
+                emptyView.setVisibility(View.GONE);
+                if (homeTeam.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

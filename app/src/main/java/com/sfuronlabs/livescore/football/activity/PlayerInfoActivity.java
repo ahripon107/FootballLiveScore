@@ -132,13 +132,13 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
 
                 setTitle(player.getName());
 
-                age.setText(Html.fromHtml("<b>Age:</b> "+player.getAge()));
-                nationality.setText(Html.fromHtml("<b>Nationality:</b> "+player.getNationality()));
-                birthPlace.setText(Html.fromHtml("<b>Birth Place:</b> "+player.getBirthPlace()));
-                position.setText(Html.fromHtml("<b>Position:</b> "+player.getPosition()));
-                team.setText(Html.fromHtml("<b>Team:</b> "+player.getTeam()));
-                weight.setText(Html.fromHtml("<b>Weight:</b> "+player.getWeight()));
-                height.setText(Html.fromHtml("<b>Height</b> :"+player.getHeight()));
+                setBasicInfo(age, "Age", player.getAge());
+                setBasicInfo(nationality, "Nationality", player.getNationality());
+                setBasicInfo(birthPlace, "Birth Place", player.getBirthPlace());
+                setBasicInfo(position, "Position", player.getPosition());
+                setBasicInfo(team, "Team", player.getTeam());
+                setBasicInfo(weight, "Weight", player.getWeight());
+                setBasicInfo(height, "Height", player.getHeight());
 
                 Picasso.with(PlayerInfoActivity.this).load("http://static.holoduke.nl/footapi/images/playerimages/"+player.getId()+".png")
                         .into(playerImage);
@@ -156,6 +156,14 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
 
+    }
+
+    private void setBasicInfo(TextView textView, String property, String value) {
+        if (value != null) {
+            textView.setText(Html.fromHtml("<b>"+property+":</b> "+value));
+        } else {
+            textView.setText(Html.fromHtml("<b>"+property+":</b> "));
+        }
     }
 
     private static class PlayerStatViewHolder extends RecyclerView.ViewHolder {

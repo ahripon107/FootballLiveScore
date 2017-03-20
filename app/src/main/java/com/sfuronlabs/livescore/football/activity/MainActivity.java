@@ -1,6 +1,9 @@
 package com.sfuronlabs.livescore.football.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
@@ -8,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +26,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.fragments.HomeFragment;
@@ -58,6 +66,7 @@ public class MainActivity extends RoboAppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
+    private String version = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +85,31 @@ public class MainActivity extends RoboAppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
+
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        if (Constants.showPopupMessage && Constants.versions.contains(version)) {
+            new AlertDialog.Builder(this)
+                    .setMessage(Constants.popupMessage)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            }).show();
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -105,4 +139,8 @@ public class MainActivity extends RoboAppCompatActivity {
             return titleText[position];
         }
     }
+
+
+
+
 }

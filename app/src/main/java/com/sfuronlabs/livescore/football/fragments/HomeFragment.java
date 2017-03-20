@@ -85,9 +85,27 @@ public class HomeFragment extends RoboFragment{
                 feedAppStart = (FeedAppStart) msg.obj;
                 countries.clear();
                 countries.addAll(feedAppStart.getCountries());
+                replace(0,"Eurocups");
+                replace(1, "World Cup");
+                replace(2, "World Cup Qualifications");
+                replace(3, "Spain");
+                replace(4, "England");
+                replace(5, "Germany");
+                replace(6, "Italy");
+                replace(7, "France");
                 countryListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void replace(int position, String country) {
+        for (int i=0;i<countries.size(); i++) {
+            if (countries.get(i).getCountry().equals(country)) {
+                countries.add(position,countries.get(i));
+                countries.remove(position+1);
+                break;
+            }
+        }
     }
 
     @Nullable

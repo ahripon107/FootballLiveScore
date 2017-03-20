@@ -34,6 +34,9 @@ public class TransferFragment extends RoboFragment{
     @InjectView(R.id.list)
     private RecyclerView transferList;
 
+    @InjectView(R.id.tv_empty)
+    private TextView emptyView;
+
     @Inject
     private ArrayList<TransferPlayer> transferPlayers;
 
@@ -87,7 +90,10 @@ public class TransferFragment extends RoboFragment{
             transferListAdapter.notifyDataSetChanged();
         }
 
-
+        emptyView.setVisibility(View.GONE);
+        if (transferPlayers.size() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+        }
     }
 
     private static class TransferListViewHolder extends RecyclerView.ViewHolder {
