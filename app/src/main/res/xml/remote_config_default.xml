@@ -24,4 +24,19 @@
         <value>xyz</value>
     </entry>
 
+    <entry>
+        <key>positive_button</key>
+        <value>yes</value>
+    </entry>
+
+    <entry>
+        <key>negative_button</key>
+        <value>no</value>
+    </entry>
+
+    <entry>
+        <key>link_available</key>
+        <value>no</value>
+    </entry>
+
 </defaultsMap>

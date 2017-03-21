@@ -23,6 +23,9 @@ public class Constants {
     public static String popupMessage = "";
     public static String playStoreUrl = "";
     public static String versions = "bchbhdcd";
+    public static String positiveButton = "yes";
+    public static String negativeButton = "no";
+    public static boolean linkAvailable = false;
 
     public static FirebaseRemoteConfig getConfig() {
         remoteConfig = FirebaseRemoteConfig.getInstance();
@@ -57,5 +60,8 @@ public class Constants {
         popupMessage = remoteConfig.getString("popup_message");
         playStoreUrl = remoteConfig.getString("play_store_url");
         versions = remoteConfig.getString("versions");
+        positiveButton = remoteConfig.getString("positive_button");
+        negativeButton = remoteConfig.getString("negative_button");
+        linkAvailable = remoteConfig.getBoolean("link_available");
     }
 }

@@ -20,6 +20,7 @@ import com.sfuronlabs.livescore.football.model.News;
 import com.sfuronlabs.livescore.football.model.NewsItem;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
@@ -63,7 +64,10 @@ public class NewsFragment extends RoboFragment{
             @Override
             public void onBindViewHolder(NewsViewHolder holder, int position) {
                 final NewsItem item = newsItems.get(position);
-                Picasso.with(getContext()).load(item.getImage()).resize(50,50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
+                if (Constants.showImage) {
+                    Picasso.with(getContext()).load(item.getImage()).resize(50,50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
+                }
+
                 holder.title.setText(item.getTitle());
                 holder.date.setText(item.getDate());
 
