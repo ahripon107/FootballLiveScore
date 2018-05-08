@@ -19,8 +19,6 @@ import com.sfuronlabs.livescore.football.activity.PlayerInfoActivity;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.Commentary;
 import com.sfuronlabs.livescore.football.model.MatchDetails;
-import com.sfuronlabs.livescore.football.model.MatchEvent;
-import com.sfuronlabs.livescore.football.model.MatchLineup;
 import com.sfuronlabs.livescore.football.model.MatchLineupPlayer;
 import com.sfuronlabs.livescore.football.model.MatchSubstitutionPlayer;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
@@ -29,8 +27,6 @@ import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
@@ -164,9 +160,9 @@ public class LineupsFragment extends RoboFragment {
 //        substitutionsList.setAdapter(substitutionListAdapter);
 //        substitutionsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Log.d("ripon", "http://holoduke.nl/footapi/commentaries/"+matchDetails.getId()+".json");
+        Log.d("ripon", "http://holoduke.nl/footapi/commentaries/" + matchDetails.getId() + ".json");
 
-        networkService.fetchCommentry(matchDetails.getId(), new DefaultMessageHandler(getContext(), false){
+        networkService.fetchCommentry(matchDetails.getId(), new DefaultMessageHandler(getContext(), false) {
             @Override
             public void onSuccess(Message msg) {
                 Commentary commentry = (Commentary) msg.obj;

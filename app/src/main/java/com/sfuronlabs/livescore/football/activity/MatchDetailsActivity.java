@@ -37,39 +37,28 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.activity_match_details)
-public class MatchDetailsActivity extends RoboAppCompatActivity{
-
-    @Inject
-    private NetworkService networkService;
-
-    @InjectView(R.id.tv_local_team)
-    private TextView localTeam;
-
-    @InjectView(R.id.tv_date)
-    private TextView date;
-
-    @InjectView(R.id.tv_score)
-    private TextView scoreline;
-
-    @InjectView(R.id.tv_time)
-    private TextView time;
-
-    @InjectView(R.id.tv_visitor_team)
-    private TextView visitorTeam;
-
-    @InjectView(R.id.logo_local_team)
-    private ImageView localTeamLogo;
-
-    @InjectView(R.id.logo_visitor_team)
-    private ImageView visitorTeamLogo;
-
-    @InjectView(R.id.adview_match_details)
-    private AdView adView;
-
-    private MatchDetails matchDetails;
+public class MatchDetailsActivity extends RoboAppCompatActivity {
 
     String[] titleText = new String[]{"Match Info", "Lineups"};
-
+    @Inject
+    private NetworkService networkService;
+    @InjectView(R.id.tv_local_team)
+    private TextView localTeam;
+    @InjectView(R.id.tv_date)
+    private TextView date;
+    @InjectView(R.id.tv_score)
+    private TextView scoreline;
+    @InjectView(R.id.tv_time)
+    private TextView time;
+    @InjectView(R.id.tv_visitor_team)
+    private TextView visitorTeam;
+    @InjectView(R.id.logo_local_team)
+    private ImageView localTeamLogo;
+    @InjectView(R.id.logo_visitor_team)
+    private ImageView visitorTeamLogo;
+    @InjectView(R.id.adview_match_details)
+    private AdView adView;
+    private MatchDetails matchDetails;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
@@ -92,9 +81,9 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
     }
 
     private void loadData() {
-        Log.d("ripon", "http://holoduke.nl/footapi/matches/"+matchId+".json");
+        Log.d("ripon", "http://holoduke.nl/footapi/matches/" + matchId + ".json");
 
-        networkService.fetchMatchDetails(matchId, new DefaultMessageHandler(this,true){
+        networkService.fetchMatchDetails(matchId, new DefaultMessageHandler(this, true) {
             @Override
             public void onSuccess(Message msg) {
                 matchDetails = (MatchDetails) msg.obj;
@@ -113,11 +102,11 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
 
                 time.setTextColor(ContextCompat.getColor(MatchDetailsActivity.this, R.color.Green));
 
-                Picasso.with(MatchDetailsActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        matchDetails.getLocalTeamId()+"_small.png").into(localTeamLogo);
+                Picasso.with(MatchDetailsActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        matchDetails.getLocalTeamId() + "_small.png").into(localTeamLogo);
 
-                Picasso.with(MatchDetailsActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        matchDetails.getVisitorTeamId()+"_small.png").into(visitorTeamLogo);
+                Picasso.with(MatchDetailsActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        matchDetails.getVisitorTeamId() + "_small.png").into(visitorTeamLogo);
 
                 localTeamLogo.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -142,6 +131,27 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
                 tabLayout.setupWithViewPager(mViewPager);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.refresh_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_load:
+                loadData();
+                return true;
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -176,27 +186,6 @@ public class MatchDetailsActivity extends RoboAppCompatActivity{
         @Override
         public CharSequence getPageTitle(int position) {
             return titleText[position];
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.refresh_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_load:
-                loadData();
-                return true;
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

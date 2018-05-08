@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
@@ -39,7 +38,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class LiveScoreFragment extends RoboFragment{
+public class LiveScoreFragment extends RoboFragment {
 
     @Inject
     private NetworkService networkService;
@@ -54,14 +53,14 @@ public class LiveScoreFragment extends RoboFragment{
 
     private ArrayList<MatchSummary> liveMatches = new ArrayList<>();
 
-    private BasicListAdapter<MatchSummary,LiveMatchesVieaHolder> liveMatchesListAdapter;
+    private BasicListAdapter<MatchSummary, LiveMatchesVieaHolder> liveMatchesListAdapter;
     private Player player;
     private Team team;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list, container,false);
+        return inflater.inflate(R.layout.list, container, false);
     }
 
     @Override
@@ -73,7 +72,7 @@ public class LiveScoreFragment extends RoboFragment{
         liveMatchesListAdapter = new BasicListAdapter<MatchSummary, LiveMatchesVieaHolder>(liveMatches) {
             @Override
             public LiveMatchesVieaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item, parent, false);
                 return new LiveMatchesVieaHolder(view);
             }
 
@@ -81,23 +80,23 @@ public class LiveScoreFragment extends RoboFragment{
             public void onBindViewHolder(LiveMatchesVieaHolder holder, int position) {
                 final MatchSummary liveMatch = liveMatches.get(position);
 
-                holder.leagueName.setText(liveMatch.getFileGroup()+" - "+liveMatch.getLeagueName());
+                holder.leagueName.setText(liveMatch.getFileGroup() + " - " + liveMatch.getLeagueName());
                 holder.localTeam.setText(liveMatch.getLocalTeam());
                 holder.visitorTeam.setText(liveMatch.getVisitorTeam());
                 holder.scoreLine.setText(liveMatch.getScoreTime());
                 if (liveMatch.getStatus().equals("HT") || liveMatch.getStatus().equals("FT")) {
                     holder.minute.setText(liveMatch.getStatus());
                 } else {
-                    holder.minute.setText(liveMatch.getStatus()+"'");
+                    holder.minute.setText(liveMatch.getStatus() + "'");
                 }
 
                 holder.minute.setTextColor(ContextCompat.getColor(getContext(), R.color.Green));
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        liveMatch.getLocalTeamId()+"_small.png").into(holder.localTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        liveMatch.getLocalTeamId() + "_small.png").into(holder.localTeamLogo);
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        liveMatch.getVisitorTeamId()+"_small.png").into(holder.visitorTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        liveMatch.getVisitorTeamId() + "_small.png").into(holder.visitorTeamLogo);
 
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,13 +110,13 @@ public class LiveScoreFragment extends RoboFragment{
             }
         };
 
-        networkService.fetchLiveNow(new DefaultMessageHandler(getContext(),true){
+        networkService.fetchLiveNow(new DefaultMessageHandler(getContext(), true) {
             @Override
             public void onSuccess(Message msg) {
                 countryLeagues = (List<CountryLeague>) msg.obj;
                 liveMatches.clear();
-                for (int i=0;i<countryLeagues.size();i++) {
-                    for (int j=0;j<countryLeagues.get(i).getLeagues().size();j++) {
+                for (int i = 0; i < countryLeagues.size(); i++) {
+                    for (int j = 0; j < countryLeagues.get(i).getLeagues().size(); j++) {
                         liveMatches.addAll(countryLeagues.get(i).getLeagues().get(j).getMatches());
                     }
 

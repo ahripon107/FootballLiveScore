@@ -34,7 +34,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class TeamInfoFragment extends RoboFragment{
+public class TeamInfoFragment extends RoboFragment {
 
     @InjectView(R.id.league_list)
     private RecyclerView competitionList;
@@ -82,37 +82,37 @@ public class TeamInfoFragment extends RoboFragment{
         scheduleList.setNestedScrollingEnabled(false);
 
         if (team.getFounded() != null) {
-            founded.setText(Html.fromHtml("<b>Founded: </b>"+team.getFounded()));
+            founded.setText(Html.fromHtml("<b>Founded: </b>" + team.getFounded()));
         } else {
             founded.setText(Html.fromHtml("<b>Founded: </b>"));
         }
 
         if (team.getCoach() != null) {
-            coach.setText(Html.fromHtml("<b>Coach: </b>"+team.getCoach()));
+            coach.setText(Html.fromHtml("<b>Coach: </b>" + team.getCoach()));
         } else {
             coach.setText(Html.fromHtml("<b>Coach: </b>"));
         }
 
         if (team.getCountry() != null) {
-            country.setText(Html.fromHtml("<b>Country: </b>"+team.getCountry()));
+            country.setText(Html.fromHtml("<b>Country: </b>" + team.getCountry()));
         } else {
             country.setText(Html.fromHtml("<b>Country: </b>"));
         }
 
         if (team.getVenueCity() != null) {
-            city.setText(Html.fromHtml("<b>City: </b>"+team.getVenueCity()));
+            city.setText(Html.fromHtml("<b>City: </b>" + team.getVenueCity()));
         } else {
             city.setText(Html.fromHtml("<b>City: </b>"));
         }
 
 
-        Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                team.getId()+"_small.png").into(teamLogo);
+        Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                team.getId() + "_small.png").into(teamLogo);
 
         competitionListAdapter = new BasicListAdapter<TeamLeague, CompetitionsViewHolder>(competitions) {
             @Override
             public CompetitionsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_team_squad,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_team_squad, parent, false);
                 return new CompetitionsViewHolder(view);
             }
 
@@ -121,12 +121,12 @@ public class TeamInfoFragment extends RoboFragment{
                 TeamLeague teamLeague = competitions.get(position);
                 holder.name.setText(teamLeague.getLeague());
                 if (teamLeague.getPosition() != null) {
-                    holder.description.setText(teamLeague.getCountry()+" - Position: "+teamLeague.getPosition());
+                    holder.description.setText(teamLeague.getCountry() + " - Position: " + teamLeague.getPosition());
                 } else {
                     holder.description.setText("");
                 }
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/flags/"+prepareCountryName(teamLeague.getCountry())+".png").into(holder.imageView);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/flags/" + prepareCountryName(teamLeague.getCountry()) + ".png").into(holder.imageView);
             }
         };
 
@@ -142,7 +142,7 @@ public class TeamInfoFragment extends RoboFragment{
         scheduleListAdapter = new BasicListAdapter<MatchSummary, ScheduleVieaHolder>(schedules) {
             @Override
             public ScheduleVieaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item, parent, false);
                 return new ScheduleVieaHolder(view);
             }
 
@@ -152,16 +152,16 @@ public class TeamInfoFragment extends RoboFragment{
                 holder.localTeam.setText(matchSummary.getLocalTeam());
                 holder.visitorTeam.setText(matchSummary.getVisitorTeam());
                 holder.leagueName.setTextSize(12.0f);
-                holder.leagueName.setText(matchSummary.getDate()+" - "+matchSummary.getLeagueName());
+                holder.leagueName.setText(matchSummary.getDate() + " - " + matchSummary.getLeagueName());
 
                 holder.scoreLine.setText(matchSummary.getScoreTime());
                 holder.minute.setText("");
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        matchSummary.getLocalTeamId()+"_small.png").into(holder.localTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        matchSummary.getLocalTeamId() + "_small.png").into(holder.localTeamLogo);
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        matchSummary.getVisitorTeamId()+"_small.png").into(holder.visitorTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        matchSummary.getVisitorTeamId() + "_small.png").into(holder.visitorTeamLogo);
 
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override

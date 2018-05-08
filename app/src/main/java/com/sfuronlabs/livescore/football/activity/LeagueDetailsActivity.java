@@ -12,8 +12,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.LeagueScheduleFragment;
-import com.sfuronlabs.livescore.football.fragments.LineupsFragment;
-import com.sfuronlabs.livescore.football.fragments.MatchInfoFragment;
 import com.sfuronlabs.livescore.football.fragments.StandingFragment;
 import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
@@ -56,6 +54,17 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -64,7 +73,7 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position ==0) {
+            if (position == 0) {
                 LeagueScheduleFragment fragment = new LeagueScheduleFragment();
                 Bundle args = new Bundle();
                 args.putString("key", leagueKey);
@@ -87,17 +96,6 @@ public class LeagueDetailsActivity extends RoboAppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return titleText[position];
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

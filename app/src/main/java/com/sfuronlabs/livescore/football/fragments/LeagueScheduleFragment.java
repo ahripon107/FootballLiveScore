@@ -2,7 +2,6 @@ package com.sfuronlabs.livescore.football.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -26,11 +25,7 @@ import com.sfuronlabs.livescore.football.service.NetworkService;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import roboguice.fragment.RoboFragment;
@@ -40,7 +35,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class LeagueScheduleFragment extends RoboFragment{
+public class LeagueScheduleFragment extends RoboFragment {
     @InjectView(R.id.list)
     private RecyclerView scheduleList;
 
@@ -55,7 +50,7 @@ public class LeagueScheduleFragment extends RoboFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list,container,false);
+        return inflater.inflate(R.layout.list, container, false);
     }
 
     @Override
@@ -65,7 +60,7 @@ public class LeagueScheduleFragment extends RoboFragment{
         scheduleListAdapter = new BasicListAdapter<MatchSummary, ScheduleVieaHolder>(schedules) {
             @Override
             public ScheduleVieaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_list_item, parent, false);
                 return new ScheduleVieaHolder(view);
             }
 
@@ -81,15 +76,15 @@ public class LeagueScheduleFragment extends RoboFragment{
                 if (liveMatch.getStatus().equals("HT") || liveMatch.getStatus().equals("FT")) {
                     holder.minute.setText(liveMatch.getStatus());
                 } else {
-                    holder.minute.setText(liveMatch.getStatus()+"'");
+                    holder.minute.setText(liveMatch.getStatus() + "'");
                 }
 
                 holder.minute.setTextColor(ContextCompat.getColor(getContext(), R.color.Green));
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        liveMatch.getLocalTeamId()+"_small.png").into(holder.localTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        liveMatch.getLocalTeamId() + "_small.png").into(holder.localTeamLogo);
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        liveMatch.getVisitorTeamId()+"_small.png").into(holder.visitorTeamLogo);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        liveMatch.getVisitorTeamId() + "_small.png").into(holder.visitorTeamLogo);
 
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -105,15 +100,15 @@ public class LeagueScheduleFragment extends RoboFragment{
         scheduleList.setAdapter(scheduleListAdapter);
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Log.d("ripon", "http://static.holoduke.nl/footapi/fixtures/"+getArguments().getString("key")+"_small.json");
-        networkService.fetchLeagueSchedule(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true){
+        Log.d("ripon", "http://static.holoduke.nl/footapi/fixtures/" + getArguments().getString("key") + "_small.json");
+        networkService.fetchLeagueSchedule(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true) {
             @Override
             public void onSuccess(Message msg) {
                 List<MatchSummary> matchSummaries = (List<MatchSummary>) msg.obj;
                 schedules.addAll(matchSummaries);
                 scheduleListAdapter.notifyDataSetChanged();
-                int position = schedules.size()-1;
-                for (int i=schedules.size()-1;i>=0;i--) {
+                int position = schedules.size() - 1;
+                for (int i = schedules.size() - 1; i >= 0; i--) {
                     if (schedules.get(i).getStatus().equals("FT")) {
                         position = i;
                         break;

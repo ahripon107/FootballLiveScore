@@ -1,6 +1,5 @@
 package com.sfuronlabs.livescore.football.activity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,12 +21,12 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.activity_news_details)
-public class NewsDetailsActivity extends RoboAppCompatActivity{
+public class NewsDetailsActivity extends RoboAppCompatActivity {
 
     public static final String EXTRA_URL = "url";
 
     @InjectView(R.id.webView)
-    private WebView mWebview ;
+    private WebView mWebview;
 
     @InjectView(R.id.adview_news_details)
     private AdView adView;
@@ -64,7 +63,7 @@ public class NewsDetailsActivity extends RoboAppCompatActivity{
         });
 
 
-        mWebview .loadUrl(url);
+        mWebview.loadUrl(url);
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();

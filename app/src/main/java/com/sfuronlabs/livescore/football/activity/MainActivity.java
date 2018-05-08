@@ -6,52 +6,24 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.inject.Inject;
-import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
+import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.fragments.HomeFragment;
 import com.sfuronlabs.livescore.football.fragments.LiveScoreFragment;
 import com.sfuronlabs.livescore.football.fragments.NewsFragment;
-import com.sfuronlabs.livescore.football.model.CountryLeague;
-import com.sfuronlabs.livescore.football.model.MatchSummary;
-import com.sfuronlabs.livescore.football.model.Player;
-import com.sfuronlabs.livescore.football.model.Team;
-import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
-import com.sfuronlabs.livescore.football.service.NetworkService;
-import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.util.Constants;
 import com.sfuronlabs.livescore.football.util.RoboAppCompatActivity;
-import com.sfuronlabs.livescore.football.util.ViewHolder;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -61,11 +33,8 @@ public class MainActivity extends RoboAppCompatActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
-
-    private AdView adView;
-
     String[] titleText = new String[]{"Home", "News", "Live Matches"};
-
+    private AdView adView;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;

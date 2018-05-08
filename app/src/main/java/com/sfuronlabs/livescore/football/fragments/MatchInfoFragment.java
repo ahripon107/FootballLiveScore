@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sfuronlabs.livescore.football.R;
 import com.sfuronlabs.livescore.football.activity.LeagueDetailsActivity;
-import com.sfuronlabs.livescore.football.activity.MatchDetailsActivity;
 import com.sfuronlabs.livescore.football.activity.PlayerInfoActivity;
 import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.Commentary;
@@ -41,7 +40,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class MatchInfoFragment extends RoboFragment{
+public class MatchInfoFragment extends RoboFragment {
 
     @InjectView(R.id.match_events_list)
     private RecyclerView matchEventList;
@@ -164,7 +163,7 @@ public class MatchInfoFragment extends RoboFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_match_info,container,false);
+        return inflater.inflate(R.layout.fragment_match_info, container, false);
     }
 
     @Override
@@ -176,7 +175,7 @@ public class MatchInfoFragment extends RoboFragment{
         matchStatsList.setNestedScrollingEnabled(false);
         commentryList.setNestedScrollingEnabled(false);
 
-        leagueName.setText(matchDetails.getCountryOfLeague()+" - "+matchDetails.getLeagueName());
+        leagueName.setText(matchDetails.getCountryOfLeague() + " - " + matchDetails.getLeagueName());
         stadiumName.setText(matchDetails.getVenue());
 
         leagueName.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +190,7 @@ public class MatchInfoFragment extends RoboFragment{
         matchEventListAdapter = new BasicListAdapter<MatchEvent, MatchEventViewHolder>(matchEvents) {
             @Override
             public MatchEventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_event_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_event_list_item, parent, false);
                 return new MatchEventViewHolder(view);
             }
 
@@ -202,10 +201,10 @@ public class MatchInfoFragment extends RoboFragment{
                     holder.rightEvent.setVisibility(View.GONE);
                     holder.rightPlayer.setVisibility(View.GONE);
                     holder.rightPlayerName.setVisibility(View.GONE);
-                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/"+
-                            matchEvent.getPlayerId()+"_small.png").into(holder.leftPlayer);
+                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+                            matchEvent.getPlayerId() + "_small.png").into(holder.leftPlayer);
                     holder.leftPlayerName.setText(matchEvent.getPlayer());
-                    holder.minute.setText(matchEvent.getMinute()+"'");
+                    holder.minute.setText(matchEvent.getMinute() + "'");
                     if (matchEvent.getType().equals("goal")) {
                         holder.leftEvent.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.football));
                     } else if (matchEvent.getType().equals("yellowcard")) {
@@ -217,10 +216,10 @@ public class MatchInfoFragment extends RoboFragment{
                     holder.leftEvent.setVisibility(View.GONE);
                     holder.leftPlayer.setVisibility(View.GONE);
                     holder.leftPlayerName.setVisibility(View.GONE);
-                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/"+
-                            matchEvent.getPlayerId()+"_small.png").into(holder.rightPlayer);
+                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+                            matchEvent.getPlayerId() + "_small.png").into(holder.rightPlayer);
                     holder.rightPlayerName.setText(matchEvent.getPlayer());
-                    holder.minute.setText(matchEvent.getMinute()+"'");
+                    holder.minute.setText(matchEvent.getMinute() + "'");
                     if (matchEvent.getType().equals("goal")) {
                         holder.rightEvent.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.football));
                     } else if (matchEvent.getType().equals("yellowcard")) {
@@ -252,7 +251,7 @@ public class MatchInfoFragment extends RoboFragment{
         matchStatsListAdapter = new BasicListAdapter<StatModel, StatsViewHolder>(stats) {
             @Override
             public StatsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_stat_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.match_stat_list_item, parent, false);
                 return new StatsViewHolder(view);
             }
 
@@ -271,7 +270,7 @@ public class MatchInfoFragment extends RoboFragment{
         commentryListAdapter = new BasicListAdapter<LiveTicker, TickerViewHolder>(commentries) {
             @Override
             public TickerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commentry_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commentry_list_item, parent, false);
                 return new TickerViewHolder(view);
             }
 
@@ -285,9 +284,9 @@ public class MatchInfoFragment extends RoboFragment{
         commentryList.setAdapter(commentryListAdapter);
         commentryList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Log.d("ripon", "http://holoduke.nl/footapi/commentaries/"+matchDetails.getId()+".json");
+        Log.d("ripon", "http://holoduke.nl/footapi/commentaries/" + matchDetails.getId() + ".json");
 
-        networkService.fetchCommentry(matchDetails.getId(), new DefaultMessageHandler(getContext(), false){
+        networkService.fetchCommentry(matchDetails.getId(), new DefaultMessageHandler(getContext(), false) {
             @Override
             public void onSuccess(Message msg) {
                 Commentary commentry = (Commentary) msg.obj;
@@ -320,10 +319,10 @@ public class MatchInfoFragment extends RoboFragment{
             if (matchDetails.getCommentaries().getStats() != null) {
                 MatchTeamStat local = matchDetails.getCommentaries().getStats().getLocalTeamStat();
                 MatchTeamStat visitor = matchDetails.getCommentaries().getStats().getVisitorTeamStat();
-                stats.add(new StatModel("Total Shots",local.getTotalShots(),visitor.getTotalShots()));
+                stats.add(new StatModel("Total Shots", local.getTotalShots(), visitor.getTotalShots()));
                 stats.add(new StatModel("Shots on Goal", local.getShotsToGoal(), visitor.getShotsToGoal()));
-                stats.add(new StatModel("Fouls",local.getFouls(), visitor.getFouls()));
-                stats.add(new StatModel("Corners",local.getCorners(), visitor.getCorners()));
+                stats.add(new StatModel("Fouls", local.getFouls(), visitor.getFouls()));
+                stats.add(new StatModel("Corners", local.getCorners(), visitor.getCorners()));
                 stats.add(new StatModel("Offsides", local.getOffsides(), visitor.getOffsides()));
                 stats.add(new StatModel("Possessation Time", local.getPossessationTime(), visitor.getPossessationTime()));
                 stats.add(new StatModel("Yellow Cards", local.getYellowCards(), visitor.getYellowCards()));

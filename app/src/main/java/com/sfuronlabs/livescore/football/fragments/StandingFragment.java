@@ -34,7 +34,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class StandingFragment extends RoboFragment{
+public class StandingFragment extends RoboFragment {
 
     @InjectView(R.id.list)
     private RecyclerView standingList;
@@ -50,7 +50,7 @@ public class StandingFragment extends RoboFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list,container,false);
+        return inflater.inflate(R.layout.list, container, false);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class StandingFragment extends RoboFragment{
         standingListAdapter = new BasicListAdapter<TeamStanding, StandingViewHolder>(standings) {
             @Override
             public StandingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.standing_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.standing_list_item, parent, false);
                 return new StandingViewHolder(view);
             }
 
@@ -76,8 +76,8 @@ public class StandingFragment extends RoboFragment{
                 holder.localTeamPts.setText(teamStanding.getPoints());
 
                 if (position != 0) {
-                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                            teamStanding.getTeamId()+"_small.png").into(holder.logo);
+                    Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                            teamStanding.getTeamId() + "_small.png").into(holder.logo);
                 }
 
                 holder.standingsLayout.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +94,8 @@ public class StandingFragment extends RoboFragment{
         standingList.setAdapter(standingListAdapter);
         standingList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Log.d("ripon", "http://static.holoduke.nl/footapi/tables/"+getArguments().getString("key")+".json");
-        networkService.fetchLeagueStandings(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true){
+        Log.d("ripon", "http://static.holoduke.nl/footapi/tables/" + getArguments().getString("key") + ".json");
+        networkService.fetchLeagueStandings(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true) {
             @Override
             public void onSuccess(Message msg) {
                 PointTable pointTable = (PointTable) msg.obj;
@@ -114,7 +114,7 @@ public class StandingFragment extends RoboFragment{
                 teamS.setDescription("");
                 standings.add(teamS);
 
-                for (int i=0;i<pointTable.getGroups().size();i++) {
+                for (int i = 0; i < pointTable.getGroups().size(); i++) {
                     standings.addAll(pointTable.getGroups().get(i).getTeams());
                 }
                 standingListAdapter.notifyDataSetChanged();

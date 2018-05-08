@@ -11,7 +11,7 @@ import com.sfuronlabs.livescore.football.R;
  * @author Ripon
  */
 
-public class SplashActivity extends Activity{
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

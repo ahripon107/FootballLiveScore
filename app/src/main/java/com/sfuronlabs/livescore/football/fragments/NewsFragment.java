@@ -35,7 +35,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class NewsFragment extends RoboFragment{
+public class NewsFragment extends RoboFragment {
 
     @InjectView(R.id.list)
     private RecyclerView newsList;
@@ -57,7 +57,7 @@ public class NewsFragment extends RoboFragment{
         newsListAdapter = new BasicListAdapter<NewsItem, NewsViewHolder>(newsItems) {
             @Override
             public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_news,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_news, parent, false);
                 return new NewsViewHolder(view);
             }
 
@@ -65,7 +65,7 @@ public class NewsFragment extends RoboFragment{
             public void onBindViewHolder(NewsViewHolder holder, int position) {
                 final NewsItem item = newsItems.get(position);
                 if (Constants.showImage) {
-                    Picasso.with(getContext()).load(item.getImage()).resize(50,50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
+                    Picasso.with(getContext()).load(item.getImage()).resize(50, 50).placeholder(R.drawable.news_visual_voetbalnieuws).into(holder.image);
                 }
 
                 holder.title.setText(item.getTitle());
@@ -82,7 +82,7 @@ public class NewsFragment extends RoboFragment{
             }
         };
 
-        networkService.fetchNewsList(new DefaultMessageHandler(getContext(),true){
+        networkService.fetchNewsList(new DefaultMessageHandler(getContext(), true) {
             @Override
             public void onSuccess(Message msg) {
                 news = (News) msg.obj;
@@ -105,7 +105,7 @@ public class NewsFragment extends RoboFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list,container,false);
+        return inflater.inflate(R.layout.list, container, false);
     }
 
 

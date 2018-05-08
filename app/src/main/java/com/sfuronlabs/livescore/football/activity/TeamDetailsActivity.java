@@ -32,7 +32,7 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_league_details)
 public class TeamDetailsActivity extends RoboAppCompatActivity {
 
-    String[] titleText = new String[]{"Team Info","Squad", "Transfers"};
+    String[] titleText = new String[]{"Team Info", "Squad", "Transfers"};
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @InjectView(R.id.pager)
@@ -54,7 +54,7 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Log.d("ripon", "http://static.holoduke.nl/footapi/team_gs/"+getIntent().getStringExtra("teamKey")+".json");
+        Log.d("ripon", "http://static.holoduke.nl/footapi/team_gs/" + getIntent().getStringExtra("teamKey") + ".json");
         networkService.fetchTeamDetails(getIntent().getStringExtra("teamKey"), new DefaultMessageHandler(this, true) {
             @Override
             public void onSuccess(Message msg) {
@@ -71,6 +71,17 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(Constants.ONE_PLUS_TEST_DEVICE)
                 .addTestDevice(Constants.XIAOMI_TEST_DEVICE).build();
         adView.loadAd(adRequest);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -110,17 +121,6 @@ public class TeamDetailsActivity extends RoboAppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return titleText[position];
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

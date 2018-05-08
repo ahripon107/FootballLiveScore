@@ -31,7 +31,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.list)
-public class LeagueListActivity extends RoboAppCompatActivity{
+public class LeagueListActivity extends RoboAppCompatActivity {
 
     @InjectView(R.id.list)
     private RecyclerView leagueList;
@@ -60,7 +60,7 @@ public class LeagueListActivity extends RoboAppCompatActivity{
             @Override
             public void onBindViewHolder(LeagueListViewHolder holder, final int position) {
                 holder.countryName.setText(leagues.get(position).getLeagueName());
-                Picasso.with(LeagueListActivity.this).load("http://static.holoduke.nl/footapi/images/flags/"+prepareCountryName(country.getCountry())+".png").into(holder.countryImage);
+                Picasso.with(LeagueListActivity.this).load("http://static.holoduke.nl/footapi/images/flags/" + prepareCountryName(country.getCountry()) + ".png").into(holder.countryImage);
 
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -82,19 +82,6 @@ public class LeagueListActivity extends RoboAppCompatActivity{
         leaguesListAdapter.notifyDataSetChanged();
     }
 
-    private static class LeagueListViewHolder extends RecyclerView.ViewHolder {
-        protected LinearLayout linearLayout;
-        protected ImageView countryImage;
-        protected TextView countryName;
-
-        public LeagueListViewHolder(View itemView) {
-            super(itemView);
-            countryImage = ViewHolder.get(itemView, R.id.img_team);
-            countryName = ViewHolder.get(itemView, R.id.tv_team_name);
-            linearLayout = ViewHolder.get(itemView, R.id.country_layout);
-        }
-    }
-
     private String prepareCountryName(String str) {
         return str.replace(' ', '-').toLowerCase();
     }
@@ -107,6 +94,19 @@ public class LeagueListActivity extends RoboAppCompatActivity{
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private static class LeagueListViewHolder extends RecyclerView.ViewHolder {
+        protected LinearLayout linearLayout;
+        protected ImageView countryImage;
+        protected TextView countryName;
+
+        public LeagueListViewHolder(View itemView) {
+            super(itemView);
+            countryImage = ViewHolder.get(itemView, R.id.img_team);
+            countryName = ViewHolder.get(itemView, R.id.tv_team_name);
+            linearLayout = ViewHolder.get(itemView, R.id.country_layout);
         }
     }
 }

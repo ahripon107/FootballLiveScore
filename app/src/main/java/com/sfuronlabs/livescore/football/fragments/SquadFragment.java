@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -31,7 +30,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class SquadFragment extends RoboFragment{
+public class SquadFragment extends RoboFragment {
 
     @InjectView(R.id.list)
     private RecyclerView squadList;
@@ -61,27 +60,24 @@ public class SquadFragment extends RoboFragment{
         squadListAdapter = new BasicListAdapter<TeamSquadPlayer, SquadViewHolder>(players) {
             @Override
             public SquadViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_team_squad,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_team_squad, parent, false);
                 return new SquadViewHolder(view);
             }
 
             @Override
             public void onBindViewHolder(SquadViewHolder holder, int position) {
                 final TeamSquadPlayer player = players.get(position);
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/"+player.getId()+".png")
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" + player.getId() + ".png")
                         .into(holder.imageView);
 
                 holder.name.setText(player.getName());
                 if (player.getPosition().equals("G")) {
                     holder.description.setText("Goalkeeper");
-                }
-                else if (player.getPosition().equals("D")) {
+                } else if (player.getPosition().equals("D")) {
                     holder.description.setText("Defender");
-                }
-                else if (player.getPosition().equals("M")) {
+                } else if (player.getPosition().equals("M")) {
                     holder.description.setText("Midfielder");
-                }
-                else if (player.getPosition().equals("A")) {
+                } else if (player.getPosition().equals("A")) {
                     holder.description.setText("Attacker");
                 }
 

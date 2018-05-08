@@ -9,11 +9,11 @@ import java.util.ArrayList;
  * @author Ripon
  */
 
-public abstract class BasicListAdapter<X,T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T>{
+public abstract class BasicListAdapter<X, T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
     ArrayList<X> elements, secondList;
 
-    public BasicListAdapter(ArrayList<X> elements){
+    public BasicListAdapter(ArrayList<X> elements) {
         this.elements = elements;
     }
 

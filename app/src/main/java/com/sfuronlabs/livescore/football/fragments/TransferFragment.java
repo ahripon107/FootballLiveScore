@@ -29,7 +29,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class TransferFragment extends RoboFragment{
+public class TransferFragment extends RoboFragment {
 
     @InjectView(R.id.list)
     private RecyclerView transferList;
@@ -46,7 +46,7 @@ public class TransferFragment extends RoboFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list,container,false);
+        return inflater.inflate(R.layout.list, container, false);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TransferFragment extends RoboFragment{
         transferListAdapter = new BasicListAdapter<TransferPlayer, TransferListViewHolder>(transferPlayers) {
             @Override
             public TransferListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_transfer,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_transfer, parent, false);
                 return new TransferListViewHolder(view);
             }
 
@@ -74,7 +74,7 @@ public class TransferFragment extends RoboFragment{
                     holder.inOut.setImageDrawable(getResources().getDrawable(R.drawable.out));
                 }
 
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/"+transferPlayer.getId()+".png")
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" + transferPlayer.getId() + ".png")
                         .into(holder.imageView);
 
             }

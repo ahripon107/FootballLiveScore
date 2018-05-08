@@ -1,6 +1,5 @@
 package com.sfuronlabs.livescore.football.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.CardView;
@@ -38,7 +37,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 @ContentView(R.layout.activity_player_info)
-public class PlayerInfoActivity extends RoboAppCompatActivity{
+public class PlayerInfoActivity extends RoboAppCompatActivity {
 
     @InjectView(R.id.player_stat_list)
     private RecyclerView playerStatList;
@@ -70,7 +69,7 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
     @InjectView(R.id.adview_player_details)
     private AdView adView;
 
-    private BasicListAdapter<Statistic,PlayerStatViewHolder> playerStatListAdapter;
+    private BasicListAdapter<Statistic, PlayerStatViewHolder> playerStatListAdapter;
 
     @Inject
     private ArrayList<Statistic> playerStats;
@@ -87,7 +86,7 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
         playerStatListAdapter = new BasicListAdapter<Statistic, PlayerStatViewHolder>(playerStats) {
             @Override
             public PlayerStatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.player_stat_list_item,parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.player_stat_list_item, parent, false);
                 return new PlayerStatViewHolder(view);
             }
 
@@ -106,8 +105,8 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
                 holder.country.setText(statistic.getName());
                 holder.leagueName.setText(statistic.getLeague());
 
-                Picasso.with(PlayerInfoActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/"+
-                        statistic.getTeamId()+"_small.png").into(holder.teamImage);
+                Picasso.with(PlayerInfoActivity.this).load("http://static.holoduke.nl/footapi/images/teams_gs/" +
+                        statistic.getTeamId() + "_small.png").into(holder.teamImage);
 
                 holder.playerStatCard.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -122,9 +121,9 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
         playerStatList.setAdapter(playerStatListAdapter);
         playerStatList.setLayoutManager(new LinearLayoutManager(this));
 
-        Log.d("ripon", "http://static.holoduke.nl/footapi/players/"+getIntent().getStringExtra("playerId")+".json");
+        Log.d("ripon", "http://static.holoduke.nl/footapi/players/" + getIntent().getStringExtra("playerId") + ".json");
 
-        networkService.fetchPlayerCareer(getIntent().getStringExtra("playerId"), new DefaultMessageHandler(this,true) {
+        networkService.fetchPlayerCareer(getIntent().getStringExtra("playerId"), new DefaultMessageHandler(this, true) {
             @Override
             public void onSuccess(Message msg) {
                 Player player = (Player) msg.obj;
@@ -140,7 +139,7 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
                 setBasicInfo(weight, "Weight", player.getWeight());
                 setBasicInfo(height, "Height", player.getHeight());
 
-                Picasso.with(PlayerInfoActivity.this).load("http://static.holoduke.nl/footapi/images/playerimages/"+player.getId()+".png")
+                Picasso.with(PlayerInfoActivity.this).load("http://static.holoduke.nl/footapi/images/playerimages/" + player.getId() + ".png")
                         .into(playerImage);
 
                 playerStats.addAll(player.getStatistics());
@@ -160,9 +159,20 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
 
     private void setBasicInfo(TextView textView, String property, String value) {
         if (value != null) {
-            textView.setText(Html.fromHtml("<b>"+property+":</b> "+value));
+            textView.setText(Html.fromHtml("<b>" + property + ":</b> " + value));
         } else {
-            textView.setText(Html.fromHtml("<b>"+property+":</b> "));
+            textView.setText(Html.fromHtml("<b>" + property + ":</b> "));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -196,17 +206,6 @@ public class PlayerInfoActivity extends RoboAppCompatActivity{
             country = ViewHolder.get(itemView, R.id.tv_country);
             leagueName = ViewHolder.get(itemView, R.id.tv_league_name);
             playerStatCard = ViewHolder.get(itemView, R.id.player_stat_card);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 }

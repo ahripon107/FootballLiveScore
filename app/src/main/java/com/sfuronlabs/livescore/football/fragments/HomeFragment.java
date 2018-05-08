@@ -34,7 +34,7 @@ import roboguice.inject.InjectView;
  * @author Ripon
  */
 
-public class HomeFragment extends RoboFragment{
+public class HomeFragment extends RoboFragment {
 
     @InjectView(R.id.list)
     private RecyclerView countryList;
@@ -64,7 +64,7 @@ public class HomeFragment extends RoboFragment{
             @Override
             public void onBindViewHolder(CountryListViewHolder holder, final int position) {
                 holder.countryName.setText(countries.get(position).getCountry());
-                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/flags/"+prepareCountryName(countries.get(position).getCountry())+".png").into(holder.countryImage);
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/flags/" + prepareCountryName(countries.get(position).getCountry()) + ".png").into(holder.countryImage);
 
                 holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -78,14 +78,13 @@ public class HomeFragment extends RoboFragment{
         };
 
 
-
-        networkService.fetchFeedAppStart(new DefaultMessageHandler(getContext(),true) {
+        networkService.fetchFeedAppStart(new DefaultMessageHandler(getContext(), true) {
             @Override
             public void onSuccess(Message msg) {
                 feedAppStart = (FeedAppStart) msg.obj;
                 countries.clear();
                 countries.addAll(feedAppStart.getCountries());
-                replace(0,"Eurocups");
+                replace(0, "Eurocups");
                 replace(1, "World Cup");
                 replace(2, "World Cup Qualifications");
                 replace(3, "Spain");
@@ -99,10 +98,10 @@ public class HomeFragment extends RoboFragment{
     }
 
     private void replace(int position, String country) {
-        for (int i=0;i<countries.size(); i++) {
+        for (int i = 0; i < countries.size(); i++) {
             if (countries.get(i).getCountry().equals(country)) {
-                countries.add(position,countries.get(i));
-                countries.remove(position+1);
+                countries.add(position, countries.get(i));
+                countries.remove(position + 1);
                 break;
             }
         }
@@ -124,6 +123,10 @@ public class HomeFragment extends RoboFragment{
         countryList.addItemDecoration(itemDecoration);
     }
 
+    private String prepareCountryName(String str) {
+        return str.replace(' ', '-').toLowerCase();
+    }
+
     private static class CountryListViewHolder extends RecyclerView.ViewHolder {
         protected LinearLayout linearLayout;
         protected ImageView countryImage;
@@ -135,9 +138,5 @@ public class HomeFragment extends RoboFragment{
             countryName = ViewHolder.get(itemView, R.id.tv_team_name);
             linearLayout = ViewHolder.get(itemView, R.id.country_layout);
         }
-    }
-
-    private String prepareCountryName(String str) {
-        return str.replace(' ', '-').toLowerCase();
     }
 }
