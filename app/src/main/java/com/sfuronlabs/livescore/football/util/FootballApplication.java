@@ -6,7 +6,6 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import static com.sfuronlabs.livescore.football.util.Constants.remoteConfig;
 
@@ -14,12 +13,16 @@ import static com.sfuronlabs.livescore.football.util.Constants.remoteConfig;
  * @author Ripon
  */
 
-public class FootballApplication extends Application{
+public class FootballApplication extends Application {
 
     public static final String TAG = FootballApplication.class
             .getSimpleName();
 
     private static FootballApplication mInstance;
+
+    public static synchronized FootballApplication getInstance() {
+        return mInstance;
+    }
 
     @Override
     public void onCreate() {
@@ -30,10 +33,6 @@ public class FootballApplication extends Application{
 
         AnalyticsTrackers.initialize(this);
         AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
-    }
-
-    public static synchronized FootballApplication getInstance() {
-        return mInstance;
     }
 
     public synchronized Tracker getGoogleAnalyticsTracker() {

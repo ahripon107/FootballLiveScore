@@ -40,11 +40,11 @@ public class Commentary implements Serializable {
 
     @Override
     public String toString() {
-        String tkr = "";
+        StringBuilder tkr = new StringBuilder();
         String sbs = "";
         if (liveticker != null) {
             for (int i=0;i<liveticker.size();i++) {
-                tkr += liveticker.get(i).toString();
+                tkr.append(liveticker.get(i).toString());
             }
         }
 

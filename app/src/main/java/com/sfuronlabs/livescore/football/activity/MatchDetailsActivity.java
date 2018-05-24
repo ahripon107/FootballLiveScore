@@ -70,8 +70,8 @@ public class MatchDetailsActivity extends RoboAppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         matchId = getIntent().getStringExtra("matchId");
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager = findViewById(R.id.pager);
+        tabLayout = findViewById(R.id.tab_layout);
 
         loadData();
 

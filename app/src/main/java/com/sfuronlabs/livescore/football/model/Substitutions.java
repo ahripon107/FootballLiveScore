@@ -31,15 +31,15 @@ public class Substitutions implements Serializable {
 
     @Override
     public String toString() {
-        String local = "";
-        String visit = "";
+        StringBuilder local = new StringBuilder();
+        StringBuilder visit = new StringBuilder();
         if (localteam != null && visitorteam != null) {
             for (int i=0;i<localteam.size();i++) {
-                local += localteam.get(i).toString();
+                local.append(localteam.get(i).toString());
             }
 
             for (int i=0;i<visitorteam.size();i++) {
-                visit += visitorteam.get(i).toString();
+                visit.append(visitorteam.get(i).toString());
             }
         }
         return "Substitutions{" +

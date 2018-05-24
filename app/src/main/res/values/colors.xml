@@ -3,6 +3,7 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#0D47A1</color>
+    <color name="lightGreyActivityBackground">#dfdfdf</color>
 
     <color name="dark">#FF222222</color>
     <color name="light">#FFEEEEEE</color>

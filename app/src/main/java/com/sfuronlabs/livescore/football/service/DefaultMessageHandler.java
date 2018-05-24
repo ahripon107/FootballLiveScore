@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import com.sfuronlabs.livescore.football.R;
 
@@ -20,10 +19,9 @@ public class DefaultMessageHandler extends Handler {
     private ProgressDialog progressDialog;
 
 
-
     public DefaultMessageHandler(Context context, boolean anyProgressDialog) {
 
-        this.contextWeakReference = new WeakReference<Context>(context);
+        this.contextWeakReference = new WeakReference<>(context);
         this.finishActivityOnPostError = finishActivityOnPostError;
 
         if (anyProgressDialog) {

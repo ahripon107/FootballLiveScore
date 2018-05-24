@@ -29,7 +29,7 @@ import roboguice.inject.InjectView;
 /**
  * @author Ripon
  */
-@ContentView(R.layout.activity_league_details)
+@ContentView(R.layout.activity_team_details)
 public class TeamDetailsActivity extends RoboAppCompatActivity {
 
     String[] titleText = new String[]{"Team Info", "Squad", "Transfers"};

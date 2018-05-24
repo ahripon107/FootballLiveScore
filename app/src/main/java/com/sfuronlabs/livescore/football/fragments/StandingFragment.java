@@ -22,6 +22,7 @@ import com.sfuronlabs.livescore.football.model.PointTable;
 import com.sfuronlabs.livescore.football.model.TeamStanding;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -93,6 +94,8 @@ public class StandingFragment extends RoboFragment {
 
         standingList.setAdapter(standingListAdapter);
         standingList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        standingList.addItemDecoration(itemDecoration);
 
         Log.d("ripon", "http://static.holoduke.nl/footapi/tables/" + getArguments().getString("key") + ".json");
         networkService.fetchLeagueStandings(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true) {

@@ -207,30 +207,30 @@ public class Team implements Serializable{
 
     @Override
     public String toString() {
-        String squads = "";
-        String sideline = "";
-        String fixture = "";
-        String league = "";
-        String shapeFixture = "";
+        StringBuilder squads = new StringBuilder();
+        StringBuilder sideline = new StringBuilder();
+        StringBuilder fixture = new StringBuilder();
+        StringBuilder league = new StringBuilder();
+        StringBuilder shapeFixture = new StringBuilder();
 
         for (int i=0;i<squad.size();i++) {
-            squads += squad.get(i).toString();
+            squads.append(squad.get(i).toString());
         }
 
         for (int i=0;i<sidelined.size();i++) {
-            sideline += sidelined.get(i).toString();
+            sideline.append(sidelined.get(i).toString());
         }
 
         for (int i=0;i<fixtures.size();i++) {
-            fixture += fixtures.get(i).toString();
+            fixture.append(fixtures.get(i).toString());
         }
 
         for (int i=0;i<leagues.size();i++) {
-            league += leagues.get(i).toString();
+            league.append(leagues.get(i).toString());
         }
 
         for (int i=0;i<shapeFixtures.size();i++) {
-            shapeFixture += shapeFixtures.get(i);
+            shapeFixture.append(shapeFixtures.get(i));
         }
 
 

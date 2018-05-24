@@ -22,6 +22,7 @@ import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.MatchSummary;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -99,6 +100,8 @@ public class LeagueScheduleFragment extends RoboFragment {
 
         scheduleList.setAdapter(scheduleListAdapter);
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        scheduleList.addItemDecoration(itemDecoration);
 
         Log.d("ripon", "http://static.holoduke.nl/footapi/fixtures/" + getArguments().getString("key") + "_small.json");
         networkService.fetchLeagueSchedule(getArguments().getString("key"), new DefaultMessageHandler(getContext(), true) {

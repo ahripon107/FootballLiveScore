@@ -25,6 +25,7 @@ import com.sfuronlabs.livescore.football.model.Player;
 import com.sfuronlabs.livescore.football.model.Team;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -129,12 +130,13 @@ public class LiveScoreFragment extends RoboFragment {
                     emptyView.setVisibility(View.VISIBLE);
                     emptyView.setText("No live matches ongoing");
                 }
-
             }
         });
 
         liveMatchesList.setAdapter(liveMatchesListAdapter);
         liveMatchesList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        liveMatchesList.addItemDecoration(itemDecoration);
     }
 
     private static class LiveMatchesVieaHolder extends RecyclerView.ViewHolder {

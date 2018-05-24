@@ -1,7 +1,5 @@
 package com.sfuronlabs.livescore.football.model;
 
-import com.google.inject.Inject;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -11,7 +9,7 @@ import java.util.List;
  * @author Ripon
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class League implements Serializable{
+public class League implements Serializable {
     private String league;
     private String key;
     private String hi;
@@ -53,7 +51,7 @@ public class League implements Serializable{
     @Override
     public String toString() {
         String mtch = "";
-        for (int i=0;i<matches.size();i++) {
+        for (int i = 0; i < matches.size(); i++) {
             mtch += matches.get(i).toString();
         }
         return "League{" +

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,12 +24,13 @@ import com.sfuronlabs.livescore.football.model.MatchLineupPlayer;
 import com.sfuronlabs.livescore.football.model.MatchSubstitutionPlayer;
 import com.sfuronlabs.livescore.football.service.DefaultMessageHandler;
 import com.sfuronlabs.livescore.football.service.NetworkService;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -43,8 +45,11 @@ public class LineupsFragment extends RoboFragment {
     @InjectView(R.id.tv_empty_view)
     private TextView emptyView;
 
-//    @InjectView(R.id.substitutions_list)
-//    private RecyclerView substitutionsList;
+    @InjectView(R.id.substitutions_list)
+    private RecyclerView substitutionsList;
+
+    @InjectView(R.id.substitutions_layout)
+    private LinearLayout substitutionLayout;
 
     private MatchDetails matchDetails;
 
@@ -54,8 +59,8 @@ public class LineupsFragment extends RoboFragment {
     @Inject
     private ArrayList<MatchLineupPlayer> visitorTeam;
 
-//    @Inject
-//    private ArrayList<MatchSubstitutionPlayer> matchSubstitutionPlayers;
+    @Inject
+    private ArrayList<MatchSubstitutionPlayer> matchSubstitutionPlayers;
 
     @Inject
     private NetworkService networkService;
@@ -74,6 +79,9 @@ public class LineupsFragment extends RoboFragment {
         super.onViewCreated(view, savedInstanceState);
 
         matchDetails = (MatchDetails) getArguments().getSerializable("matchdetails");
+        lineupsList.setNestedScrollingEnabled(false);
+        substitutionsList.setNestedScrollingEnabled(false);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
 
         lineupsListAdapter = new BasicListAdapter<MatchLineupPlayer, LineupViewHolder>(homeTeam, visitorTeam) {
             @Override
@@ -118,47 +126,36 @@ public class LineupsFragment extends RoboFragment {
 
         lineupsList.setAdapter(lineupsListAdapter);
         lineupsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        lineupsList.addItemDecoration(itemDecoration);
 
-//        substitutionListAdapter = new BasicListAdapter<MatchSubstitutionPlayer, SubstitutionListViewHolder>(matchSubstitutionPlayers) {
-//            @Override
-//            public SubstitutionListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_substitutions,parent,false);
-//                return new SubstitutionListViewHolder(view);
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(SubstitutionListViewHolder holder, int position) {
-//                MatchSubstitutionPlayer matchSubstitutionPlayer = matchSubstitutionPlayers.get(position);
-//
-//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
-//                        matchSubstitutionPlayer.getOn_id() + "_small.png").into(holder.leftInPlayer);
-//                holder.leftInPlayerName.setText(matchSubstitutionPlayer.getOn());
-//                holder.leftInEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_in));
-//
-//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
-//                        matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.leftOutEvent);
-//                holder.leftOutPlayerName.setText(matchSubstitutionPlayer.getOn());
-//                holder.leftOutEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
-//
-//                holder.rightLinearLayout.setVisibility(View.GONE);
-//
-//                holder.minute.setText(matchSubstitutionPlayer.getMinute());
-//
-//
-//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
-//                        matchSubstitutionPlayer.getOn_id() + "_small.png").into(holder.rightInPlayer);
-//                holder.rightInPlayerName.setText(matchSubstitutionPlayer.getOn());
-//                holder.rightInEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_in));
-//
-//                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
-//                        matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.rightOutPlayer);
-//                holder.rightOutPlayerName.setText(matchSubstitutionPlayer.getOff());
-//                holder.rightOutEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
-//            }
-//        };
-//
-//        substitutionsList.setAdapter(substitutionListAdapter);
-//        substitutionsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        substitutionListAdapter = new BasicListAdapter<MatchSubstitutionPlayer, SubstitutionListViewHolder>(matchSubstitutionPlayers) {
+            @Override
+            public SubstitutionListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_substitutions,parent,false);
+                return new SubstitutionListViewHolder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(SubstitutionListViewHolder holder, int position) {
+                MatchSubstitutionPlayer matchSubstitutionPlayer = matchSubstitutionPlayers.get(position);
+
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+                        matchSubstitutionPlayer.getOn_id() + "_small.png").into(holder.inPlayerImage);
+                holder.inPlayerName.setText(matchSubstitutionPlayer.getOn());
+                holder.inEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_in));
+
+                Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
+                        matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.outPlayerImage);
+                holder.outPlayerName.setText(matchSubstitutionPlayer.getOn());
+                holder.outEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
+
+                holder.minute.setText(matchSubstitutionPlayer.getMinute()+"'");
+            }
+        };
+
+        substitutionsList.setAdapter(substitutionListAdapter);
+        substitutionsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        substitutionsList.addItemDecoration(itemDecoration);
 
         Log.d("ripon", "http://holoduke.nl/footapi/commentaries/" + matchDetails.getId() + ".json");
 
@@ -186,20 +183,27 @@ public class LineupsFragment extends RoboFragment {
                     lineupsListAdapter.notifyDataSetChanged();
                 }
 
-                emptyView.setVisibility(View.GONE);
-                if (homeTeam.size() == 0) {
-                    emptyView.setVisibility(View.VISIBLE);
+                if (commentry.getSubstitutions() != null) {
+                    matchSubstitutionPlayers.clear();
+                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getLocalteam());
+                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getVisitorteam());
+
+                    Collections.sort(matchSubstitutionPlayers);
+
+                    substitutionListAdapter.notifyDataSetChanged();
+                    Log.d("ripon", "onSuccess: "+ matchSubstitutionPlayers.size());
+
                 }
 
-//                if (commentry.getSubstitutions() != null) {
-//                    matchSubstitutionPlayers.clear();
-//                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getLocalteam());
-//                    matchSubstitutionPlayers.addAll(commentry.getSubstitutions().getVisitorteam());
-//
-//                    Collections.sort(matchSubstitutionPlayers);
-//
-//                    substitutionListAdapter.notifyDataSetChanged();
-//                }
+                substitutionLayout.setVisibility(View.GONE);
+                if (matchSubstitutionPlayers.size() > 0) {
+                    substitutionLayout.setVisibility(View.VISIBLE);
+                }
+
+                emptyView.setVisibility(View.GONE);
+                if (homeTeam.size() == 0 && matchSubstitutionPlayers.size() == 0) {
+                    emptyView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -218,18 +222,17 @@ public class LineupsFragment extends RoboFragment {
             intent.putExtra("playerId", playerId);
             getActivity().startActivity(intent);
         }
-
     }
 
     private static class LineupViewHolder extends RecyclerView.ViewHolder {
         protected LinearLayout leftLinearLayout;
         protected LinearLayout rightLinearLayout;
-        protected CircleImageView leftPlayer;
+        protected ImageView leftPlayer;
         protected TextView leftPlayerName;
-        protected CircleImageView leftEvent;
-        protected CircleImageView rightPlayer;
+        protected ImageView leftEvent;
+        protected ImageView rightPlayer;
         protected TextView rightPlayerName;
-        protected CircleImageView rightEvent;
+        protected ImageView rightEvent;
         protected TextView minute;
 
         public LineupViewHolder(View itemView) {
@@ -249,42 +252,25 @@ public class LineupsFragment extends RoboFragment {
 
     private static class SubstitutionListViewHolder extends RecyclerView.ViewHolder {
 
-        protected LinearLayout leftLinearLayout;
-        protected LinearLayout rightLinearLayout;
-        protected CircleImageView leftInPlayer;
-        protected TextView leftInPlayerName;
-        protected CircleImageView leftInEvent;
-        protected CircleImageView rightInPlayer;
-        protected TextView rightInPlayerName;
-        protected CircleImageView rightInEvent;
+        protected ImageView inPlayerImage;
+        protected TextView inPlayerName;
+        protected ImageView inEvent;
 
-        protected CircleImageView leftOutPlayer;
-        protected TextView leftOutPlayerName;
-        protected CircleImageView leftOutEvent;
-        protected CircleImageView rightOutPlayer;
-        protected TextView rightOutPlayerName;
-        protected CircleImageView rightOutEvent;
+        protected ImageView outPlayerImage;
+        protected TextView outPlayerName;
+        protected ImageView outEvent;
 
         protected TextView minute;
 
         public SubstitutionListViewHolder(View itemView) {
             super(itemView);
 
-            leftLinearLayout = ViewHolder.get(itemView, R.id.left_linear_layout);
-            rightLinearLayout = ViewHolder.get(itemView, R.id.right_linear_layout);
-            leftInPlayer = ViewHolder.get(itemView, R.id.img_left_in_event);
-            leftInPlayerName = ViewHolder.get(itemView, R.id.tv_left_in_player);
-            leftInEvent = ViewHolder.get(itemView, R.id.img_left_in_event);
-            rightInPlayer = ViewHolder.get(itemView, R.id.img_right_in_player);
-            rightInPlayerName = ViewHolder.get(itemView, R.id.tv_right_in_player);
-            rightInEvent = ViewHolder.get(itemView, R.id.img_right_in_event);
-
-            leftOutPlayer = ViewHolder.get(itemView, R.id.img_left_out_player);
-            leftOutPlayerName = ViewHolder.get(itemView, R.id.tv_left_out_player);
-            leftOutEvent = ViewHolder.get(itemView, R.id.img_left_out_event);
-            rightOutPlayer = ViewHolder.get(itemView, R.id.img_right_out_player);
-            rightOutPlayerName = ViewHolder.get(itemView, R.id.tv_right_out_player);
-            rightOutEvent = ViewHolder.get(itemView, R.id.img_right_out_event);
+            inPlayerImage = ViewHolder.get(itemView, R.id.img_in_player);
+            inPlayerName = ViewHolder.get(itemView, R.id.tv_in_player);
+            inEvent = ViewHolder.get(itemView, R.id.img_in_event);
+            outPlayerImage = ViewHolder.get(itemView, R.id.img_out_player);
+            outPlayerName = ViewHolder.get(itemView, R.id.tv_out_player);
+            outEvent = ViewHolder.get(itemView, R.id.img_out_event);
 
             minute = ViewHolder.get(itemView, R.id.tv_minute);
         }

@@ -65,7 +65,7 @@ public class CollectionUtils {
     }
 
     public static List<Short> toListFromShort(short... shortArray) {
-        List<Short> list = new ArrayList<Short>(shortArray.length);
+        List<Short> list = new ArrayList<>(shortArray.length);
 
         for (short value : shortArray) {
             list.add(value);
@@ -75,7 +75,7 @@ public class CollectionUtils {
     }
 
     public static List<Integer> toListFromInt(int... intArray) {
-        List<Integer> list = new ArrayList<Integer>(intArray.length);
+        List<Integer> list = new ArrayList<>(intArray.length);
 
         for (int value : intArray) {
             list.add(value);
@@ -89,7 +89,7 @@ public class CollectionUtils {
             return null;
         }
 
-        List<? extends Comparable> result = new LinkedList<Comparable>(data);
+        List<? extends Comparable> result = new LinkedList<>(data);
         Collections.sort(result);
 
         return result;

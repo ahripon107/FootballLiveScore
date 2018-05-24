@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,7 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -183,6 +183,7 @@ public class MatchInfoFragment extends RoboFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), LeagueDetailsActivity.class);
                 intent.putExtra("leagueKey", matchDetails.getLeagueKey());
+                intent.putExtra("leaguename", matchDetails.getLeagueName());
                 startActivity(intent);
             }
         });
@@ -396,12 +397,12 @@ public class MatchInfoFragment extends RoboFragment {
     private static class MatchEventViewHolder extends RecyclerView.ViewHolder {
         protected LinearLayout leftLinearLayout;
         protected LinearLayout rightLinearLayout;
-        protected CircleImageView leftPlayer;
+        protected ImageView leftPlayer;
         protected TextView leftPlayerName;
-        protected CircleImageView leftEvent;
-        protected CircleImageView rightPlayer;
+        protected ImageView leftEvent;
+        protected ImageView rightPlayer;
         protected TextView rightPlayerName;
-        protected CircleImageView rightEvent;
+        protected ImageView rightEvent;
         protected TextView minute;
 
         public MatchEventViewHolder(View itemView) {

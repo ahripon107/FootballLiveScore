@@ -2,6 +2,11 @@
     <string name="app_name">Live Football Score</string>
     <string name="action_settings">Settings</string>
     <string name="load">reload</string>
+    <string name="title_home">Home</string>
+    <string name="title_news">News</string>
+    <string name="title_live_matches">Live Matches</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_standings">Standings</string>
 
     <string name="leaguedetails">ca-app-pub-9201945236996508/6617813678</string>
     <string name="main">ca-app-pub-9201945236996508/8094546870</string>

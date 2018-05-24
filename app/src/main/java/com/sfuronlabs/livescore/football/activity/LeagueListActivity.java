@@ -49,6 +49,7 @@ public class LeagueListActivity extends RoboAppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         country = (CountryAppStart) getIntent().getSerializableExtra("country");
+        setTitle(country.getCountry());
 
         leaguesListAdapter = new BasicListAdapter<LeagueAppStart, LeagueListViewHolder>(leagues) {
             @Override
@@ -67,6 +68,7 @@ public class LeagueListActivity extends RoboAppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = new Intent(LeagueListActivity.this, LeagueDetailsActivity.class);
                         intent.putExtra("leagueKey", leagues.get(position).getKey());
+                        intent.putExtra("leaguename", leagues.get(position).getLeagueName());
                         startActivity(intent);
                     }
                 });

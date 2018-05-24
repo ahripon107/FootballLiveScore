@@ -1,30 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_empty_view"
-        android:layout_margin="5dp"
-        android:textSize="20sp"
-        android:textColor="@color/Black"
-        android:text="Nothing found to display"
-        android:gravity="center_horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/team_lineup_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/substitutions_list"
-        android:layout_below="@id/team_lineup_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp" />
+        <TextView
+            android:id="@+id/tv_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:text="Nothing found to display"
+            android:textColor="@color/Black"
+            android:textSize="20sp"
+            android:visibility="gone" />
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/team_lineup_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:id="@+id/substitutions_layout"
+            android:layout_below="@id/team_lineup_list">
+
+            <View
+                android:background="@color/Black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="2dp"
+                android:layout_marginLeft="3dp"/>
+            <TextView
+                android:layout_margin="5dp"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:text="SUBSTITUTIONS"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:background="@color/Black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="2dp"
+                android:layout_marginRight="3dp"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/substitutions_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/substitutions_layout"
+            android:layout_margin="5dp" />
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
