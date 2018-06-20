@@ -146,7 +146,7 @@ public class LineupsFragment extends RoboFragment {
 
                 Picasso.with(getContext()).load("http://static.holoduke.nl/footapi/images/playerimages/" +
                         matchSubstitutionPlayer.getOff_id() + "_small.png").into(holder.outPlayerImage);
-                holder.outPlayerName.setText(matchSubstitutionPlayer.getOn());
+                holder.outPlayerName.setText(matchSubstitutionPlayer.getOff());
                 holder.outEvent.setImageDrawable(getResources().getDrawable(R.drawable.subst_out));
 
                 holder.minute.setText(matchSubstitutionPlayer.getMinute()+"'");
@@ -159,6 +159,7 @@ public class LineupsFragment extends RoboFragment {
 
         Log.d("ripon", "http://holoduke.nl/footapi/commentaries/" + matchDetails.getId() + ".json");
 
+        substitutionLayout.setVisibility(View.GONE);
         networkService.fetchCommentry(matchDetails.getId(), new DefaultMessageHandler(getContext(), false) {
             @Override
             public void onSuccess(Message msg) {

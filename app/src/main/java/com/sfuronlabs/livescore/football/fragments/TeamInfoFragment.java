@@ -21,6 +21,7 @@ import com.sfuronlabs.livescore.football.adapter.BasicListAdapter;
 import com.sfuronlabs.livescore.football.model.MatchSummary;
 import com.sfuronlabs.livescore.football.model.Team;
 import com.sfuronlabs.livescore.football.model.TeamLeague;
+import com.sfuronlabs.livescore.football.util.DividerItemDecoration;
 import com.sfuronlabs.livescore.football.util.ViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -176,6 +177,8 @@ public class TeamInfoFragment extends RoboFragment {
 
         scheduleList.setAdapter(scheduleListAdapter);
         scheduleList.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        scheduleList.addItemDecoration(itemDecoration);
 
         if (team.getFixtures() != null) {
             schedules.addAll(team.getFixtures());
