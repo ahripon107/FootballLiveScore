@@ -9,7 +9,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/img_news"
         android:layout_width="60dp"
         android:layout_height="60dp"

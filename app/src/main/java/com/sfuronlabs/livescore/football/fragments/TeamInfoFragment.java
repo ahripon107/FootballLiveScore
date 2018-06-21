@@ -27,7 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -192,11 +191,10 @@ public class TeamInfoFragment extends RoboFragment {
     }
 
     private static class CompetitionsViewHolder extends RecyclerView.ViewHolder {
-        protected CircleImageView imageView;
+        protected ImageView imageView;
         protected TextView name;
         protected TextView description;
         protected CardView cardView;
-
 
         public CompetitionsViewHolder(View itemView) {
             super(itemView);

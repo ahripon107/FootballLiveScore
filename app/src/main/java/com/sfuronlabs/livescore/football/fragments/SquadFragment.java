@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -22,7 +23,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -72,13 +72,13 @@ public class SquadFragment extends RoboFragment {
 
                 holder.name.setText(player.getName());
                 if (player.getPosition().equals("G")) {
-                    holder.description.setText("Goalkeeper");
+                    holder.description.setText(R.string.goalkeeper);
                 } else if (player.getPosition().equals("D")) {
-                    holder.description.setText("Defender");
+                    holder.description.setText(R.string.defender);
                 } else if (player.getPosition().equals("M")) {
-                    holder.description.setText("Midfielder");
+                    holder.description.setText(R.string.midfielder);
                 } else if (player.getPosition().equals("A")) {
-                    holder.description.setText("Attacker");
+                    holder.description.setText(R.string.attacker);
                 }
 
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +109,7 @@ public class SquadFragment extends RoboFragment {
     }
 
     private static class SquadViewHolder extends RecyclerView.ViewHolder {
-        protected CircleImageView imageView;
+        protected ImageView imageView;
         protected TextView name;
         protected TextView description;
         protected CardView cardView;

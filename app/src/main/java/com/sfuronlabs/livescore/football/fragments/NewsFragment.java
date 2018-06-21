@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +28,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
@@ -110,7 +110,7 @@ public class NewsFragment extends RoboFragment {
 
 
     private static class NewsViewHolder extends RecyclerView.ViewHolder {
-        protected CircleImageView image;
+        protected ImageView image;
         protected TextView title;
         protected TextView date;
         protected LinearLayout linearLayout;
